@@ -5,8 +5,6 @@
  */
 package vocablearning;
 
-import java.util.Random;
-
 /**
  *
  * @author Minh

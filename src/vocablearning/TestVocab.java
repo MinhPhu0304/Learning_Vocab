@@ -9,11 +9,9 @@ import java.util.Collections;
 public class TestVocab {
     private int score;
     private ArrayList<Question> questionList;
-    private ArrayList<Word> availableWordList;
     private final int NUMBER_QUESTION = 20;
     
     public TestVocab(){
-        //Decide how many question then initialized that much element accrodingly
         score = 0;
         questionList = new ArrayList<>();
         testingGenerateQuestion();//TESTING PURPOSE ONLY. DELETE WHEN FINISH
