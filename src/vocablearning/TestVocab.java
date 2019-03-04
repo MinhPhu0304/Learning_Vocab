@@ -1,6 +1,5 @@
 package vocablearning;
 import java.util.ArrayList;
-import java.util.Collections;
 /**
  * @author Minh
  * Class is used for testing mode in the program
@@ -11,29 +10,17 @@ public class TestVocab {
     private ArrayList<Question> questionList;
     private final int NUMBER_QUESTION = 20;
     
+    //This constructor should only be for development
+    // To use it for real program this class has to take in a word List
     public TestVocab(){
         score = 0;
         questionList = new ArrayList<>();
         testingGenerateQuestion();//TESTING PURPOSE ONLY. DELETE WHEN FINISH
-        __readingAvailableWordFromStorage();//this should only be called once
-                                            //only used to set up a list of availableword
                                       
     }
     
-    private void __readingAvailableWordFromStorage(){
-        
-        availableWordList = new ArrayList(40);//TESTING ONLY
-    }
-    
-    private void generateQuestion(){
-        
-        Collections.shuffle(availableWordList);
-        
-    }
-    
     public void startTest(){
-    
-        generateQuestion();
+        
         
     }
     

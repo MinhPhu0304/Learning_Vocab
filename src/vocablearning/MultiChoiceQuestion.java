@@ -5,7 +5,6 @@
  */
 package vocablearning;
 
-import java.util.ArrayList;
 
 /**
  *
