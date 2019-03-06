@@ -10,7 +10,7 @@ package vocablearning;
  * @author Minh
  */
 public class Word {
-    private final String word, meaning;
+    protected final String word, meaning;
     
     
     public Word(String word,String meaning){

@@ -32,20 +32,22 @@ public class MultiChoiceQuestion extends Question {
         
     }
     
-    /**
-     * Comparing user Answer with the question answer
-     *  It may throw exception for the higher class to deal with
-     * @param userInput
-     * @return true if the user is correct and vice versa
-     * @throws OutOfRangeMultiChoiceException
-     */
-    public boolean checkUserAnswer(String userInput) throws OutOfRangeMultiChoiceException{
-        return true; //Not implemented
-    }
-    
     @Override
     public String toString(){
         return "Multichoice question";
+    }
+
+    /**
+     *  Checking user input but handling user input will be taken by the parent class
+     *  since the scanner class will be initialized there
+     * @param userInput
+     * @return A enum type to say if user's answer correct or incorrect or the
+     *  answer is out of range for the multi-choice
+     */
+    @Override
+    public UserAnswerResult checkUserAnswer(String userInput){
+        return UserAnswerResult.UserCorrect;
+        //NOT IMPLEMENTED YET
     }
     
 }
