@@ -5,7 +5,6 @@
  */
 package vocablearning;
 
-
 /**
  *
  * @author Minh
@@ -38,9 +37,9 @@ public class MultiChoiceQuestion extends Question {
      *  It may throw exception for the higher class to deal with
      * @param userInput
      * @return true if the user is correct and vice versa
-     * @exception User anwser is not within the range from A to D
+     * @throws OutOfRangeMultiChoiceException
      */
-    public boolean checkUserAnswer(String userInput){
+    public boolean checkUserAnswer(String userInput) throws OutOfRangeMultiChoiceException{
         return true; //Not implemented
     }
     

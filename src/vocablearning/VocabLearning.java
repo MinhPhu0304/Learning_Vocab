@@ -17,7 +17,7 @@ public class VocabLearning {
     public static void main(String[] args) {
         System.out.println("Staatsangehörigkeit");//testing printing German word
         TestVocab newTest = new TestVocab();
-        
+        AvailableWord wordList = new AvailableWord();
     }
     
 }
