@@ -25,7 +25,7 @@ public class MultiChoiceQuestion extends Question {
      * The reason we have this method is to print the question the suit the question type
      * rather than checking instance of the class every time we get question and answer
      * If we only get question and get answer in the parent class we have to use
-     * If-else statement which will make the code longer and less readable
+     * If-else statement which will make the code longer and less readable.
      */
     @Override
     public void printQuestion(){

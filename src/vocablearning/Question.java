@@ -22,7 +22,7 @@ abstract public class Question {
     
     protected abstract void generateQuestion();
     public abstract void printQuestion();
-    public abstract boolean checkUserAsnwer(String userInput);
+    public abstract UserAnswerResult checkUserAnswer(String userInput);
     
     public String toString(){
         return "This question has a the word: " + this.answer + " and it means "+ this.question;

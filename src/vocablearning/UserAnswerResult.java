@@ -6,9 +6,9 @@
 package vocablearning;
 
 /**
- *
+ *  This class will be used to return the result checking for the user answer
  * @author Minh
  */
 public enum UserAnswerResult {
-    
+    UserCorrect, UserIncorrect, MultiChoiceOutOfRange
 }
