@@ -25,14 +25,13 @@ public class VocabLearning {
         System.out.println("Staatsangehörigkeit");//testing printing German word
         TestVocab newTest = new TestVocab();
         AvailableWord wordList = new AvailableWord();
-        
+        Scanner scan = new Scanner(System.in);
         
         //Start Menu asking for which modw the user wants to use
         int userInput = 0; // User input for the menu, seet to 0 as that is a valid condition for the following loop 
         
         while(userInput != EXIT) // This is the menu which is a while loop so the user can return to the main menu if they wish to switch modes
         {
-            Scanner scan = new Scanner(System.in);
             System.out.println("Menu");
             System.out.println("1) Testing Mode");
             System.out.println("2) Multichoice");
