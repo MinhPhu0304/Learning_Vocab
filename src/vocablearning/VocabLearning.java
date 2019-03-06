@@ -17,16 +17,20 @@ public class VocabLearning {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        final int TESTING_MODE = 1;
+        final int LEARNING_MODE = 2;
+        final int EXIT = 3;
+        
         System.out.println("Staatsangehörigkeit");//testing printing German word
         TestVocab newTest = new TestVocab();
         AvailableWord wordList = new AvailableWord();
         
         
-        
         //Start Menu asking for which modw the user wants to use
         int userInput = 0; // User input for the menu, seet to 0 as that is a valid condition for the following loop 
         
-        while(userInput != 3) // This is the menu which is a while loop so the user can return to the main menu if they wish to switch modes
+        while(userInput != EXIT) // This is the menu which is a while loop so the user can return to the main menu if they wish to switch modes
         {
             Scanner scan = new Scanner(System.in);
             System.out.println("Menu");
@@ -56,15 +60,15 @@ public class VocabLearning {
             }
             
             switch (userInput) {
-                case 1:
+                case TESTING_MODE:
                     //Code for the testing mode will be implemented here
                     System.out.println("Testing Mode(Placeholer)\n");
                     break;
-                case 2:
+                case LEARNING_MODE:
                     //This is where the multichoice queestion will go
                     System.out.println("Multi choice Mode(Placeholer)\n");
                     break;
-                case 3:
+                case EXIT:
                     System.out.println("Exiting Program...");
                     System.exit(0);
                 default:
