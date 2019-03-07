@@ -24,13 +24,6 @@ public class VocabLearning {
         final int EXIT = 3;
         
         AvailableWord wordList = new AvailableWord();
-        ArrayList<FillInTheBlankQuestion> shit = new ArrayList<>();
-        for(Word i: wordList.getAvailableWord()){
-            shit.add(new FillInTheBlankQuestion(i));
-        }
-        for(FillInTheBlankQuestion i: shit){
-            i.printQuestion();
-        }
         
         Scanner scan = new Scanner(System.in);
         

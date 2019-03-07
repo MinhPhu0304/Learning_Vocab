@@ -1,5 +1,7 @@
 package vocablearning;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 /**
  * @author Minh
  * Class is used for testing mode in the program
@@ -8,15 +10,19 @@ import java.util.ArrayList;
 public class TestVocab {
     private int score;
     private ArrayList<Question> questionList;
-    private final int NUMBER_QUESTION = 20;
     
-    //This constructor should only be for development
-    // To use it for real program this class has to take in a word List
-    public TestVocab(){
+    private final int MULTICHOICE = 0;
+    private final int FILL_IN_THE_BLANK = 1;
+    private final int NUMBER_QUESTION = 20;
+    private final Random randomQuestionTypePicker;//This will be used to randomly choose between 
+                                                  //multichoice or fill in the blank
+
+    public TestVocab(List<Word> wordList){
         score = 0;
+        randomQuestionTypePicker = new Random();
         questionList = new ArrayList<>();
         testingGenerateQuestion();//TESTING PURPOSE ONLY. DELETE WHEN FINISH
-                                      
+        generateQuestion();                         
     }
     
     public void startTest(){
@@ -39,6 +45,20 @@ public class TestVocab {
         
         for(Question i: questionList){
             System.out.println(i.toString());
+        }
+    }
+
+    private void generateQuestion() {
+        
+        for(int questionGenerate = 0; questionGenerate < NUMBER_QUESTION; questionGenerate++){
+            int questionType = randomQuestionTypePicker.nextInt(2);
+            
+            switch(questionType){
+                case FILL_IN_THE_BLANK:
+                    break;
+                case MULTICHOICE:
+                    break;
+            }
         }
     }
 }
