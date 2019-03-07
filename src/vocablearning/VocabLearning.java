@@ -48,30 +48,35 @@ public class VocabLearning {
                  *      THE PROGRAM STILL TAKE IT AS A VALID INPUT  *
                  *          THIS NEEDS TO BE REFACTORED             *
                  ****************************************************/
-                char tempChar = tempInput.charAt(0); //Creating a char variable for checking purposes
-                if(!Character.isDigit(tempChar))
+                boolean isUserInputValid = true; // This variable indicates whether the input is valid so tempInput can be converted in to integer safetly
+
+                for(int characterIndex = 0; characterIndex < tempInput.length(); characterIndex++)
                 {
-                    userInput = 0; //Since the input is not a number set userInput to an invalid number so they will have to renter
+                    if(!Character.isDigit(tempInput.charAt(characterIndex)))
+                    {
+                        isUserInputValid = false;
+                        userInput = 0; //Since the input is not a number set userInput to an invalid number so they will have to renter
+                    }
+                }
+                
+                if(isUserInputValid && tempInput.length() < 10) // checking if the number doesn't have any letter also check if the string length is less than 10(as there is no option tht require 10 numberic character) in order to avoid parse a number to big which will cause an exception 
+                {
+                    userInput = Integer.parseInt(tempInput);
                 }
                 else
                 {
-                    tempInput = ""+tempChar; //Make the user input the first number that they entered
-                    userInput = Integer.parseInt(tempInput);
-                }
-            }
-            else
-            {
                 userInput = 0;
+                }
             }
             
             switch (userInput) {
                 case TESTING_MODE:
                     //Code for the testing mode will be implemented here
-                    System.out.println("Testing Mode(Placeholer)\n");
+                    System.out.println("Testing Mode(Placeholder)\n");
                     break;
                 case LEARNING_MODE:
                     //This is where the multichoice queestion will go
-                    System.out.println("Multi choice Mode(Placeholer)\n");
+                    System.out.println("Multi choice Mode(Placeholder)\n");
                     break;
                 case EXIT:
                     System.out.println("Exiting Program...");
