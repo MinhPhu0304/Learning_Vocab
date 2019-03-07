@@ -12,8 +12,8 @@ package vocablearning;
 public class MultiChoiceQuestion extends Question {
 
     //REMEMBER TO ADD ARRAY_LIST OF AVAILABLE WORD
-    public MultiChoiceQuestion(String word, String meaning) {
-        super(word, meaning);
+    public MultiChoiceQuestion(Word wordToConstructQuestion) {
+        super(wordToConstructQuestion);
     }
     
     @Override

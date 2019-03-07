@@ -5,6 +5,7 @@
  */
 package vocablearning;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -22,9 +23,15 @@ public class VocabLearning {
         final int LEARNING_MODE = 2;
         final int EXIT = 3;
         
-        System.out.println("Staatsangehörigkeit");//testing printing German word
-        TestVocab newTest = new TestVocab();
         AvailableWord wordList = new AvailableWord();
+        ArrayList<FillInTheBlankQuestion> shit = new ArrayList<>();
+        for(Word i: wordList.getAvailableWord()){
+            shit.add(new FillInTheBlankQuestion(i));
+        }
+        for(FillInTheBlankQuestion i: shit){
+            i.printQuestion();
+        }
+        
         Scanner scan = new Scanner(System.in);
         
         //Start Menu asking for which modw the user wants to use

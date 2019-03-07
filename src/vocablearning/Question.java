@@ -13,9 +13,9 @@ abstract public class Question {
     protected String question;//this will be based on the meaning of the word.
     protected String answer;  
     
-    public Question(String word,String meaning){
-        this.answer = word;
-        this.question = meaning;//Either the computer gave user the meaning then user 
+    public Question(Word wordToConstructQuestion){
+        this.answer = wordToConstructQuestion.getWord();
+        this.question = wordToConstructQuestion.getMeaning();//Either the computer gave user the meaning then user 
                                 //fill in the blank or user are given meaning then pick from the 
                                 //available word choices;
     }

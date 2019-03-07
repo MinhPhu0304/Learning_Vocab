@@ -11,8 +11,8 @@ package vocablearning;
  */
 public class FillInTheBlankQuestion extends Question {
 
-    public FillInTheBlankQuestion(String word, String meaning) {
-        super(word, meaning);
+    public FillInTheBlankQuestion(Word wordToConstructQuestion) {
+        super(wordToConstructQuestion);
     }
     
     /**

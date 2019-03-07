@@ -28,6 +28,6 @@ public class Word {
     
     @Override
     public String toString(){
-        return "The word is " +  this.word;
+        return this.word + " : " + this.meaning + "\n";
     }
 }

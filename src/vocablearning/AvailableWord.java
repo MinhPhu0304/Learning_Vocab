@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  *  This class will take care of the text file input and output
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 public class AvailableWord {
     
     private final String availableWordFileURL = "./AvailableWord.txt";
+    private final int END_OF_FILE = -1;
     private ArrayList<Word> availableWord;
     
     
@@ -51,14 +53,20 @@ public class AvailableWord {
         }
     }
     
+    /**
+     * This class will read all data from the available word in text file then
+     *  it will call another method to construct a word object from data read
+     * @param buffer
+     * @throws IOException 
+     */
     private void readInAvailableWordList(BufferedReader buffer) throws IOException{
         
         String stringRead = "";
         if(buffer.ready()){
             while(true){
                 stringRead += buffer.readLine();
-                if(buffer.read() == -1){
-                    break;
+                if(buffer.read() == END_OF_FILE){
+                    break;// In here -1 meaning the end of file
                 }
             }
             buffer.close();
@@ -66,17 +74,18 @@ public class AvailableWord {
         constructWordList(stringRead);
     }
     
+    
     private void constructWordList(String stringRead){
-        char [] arrayOfWords = stringRead.toCharArray();
+        ArrayList<String> arrayListOfData = new ArrayList<>();
+        StringTokenizer extractingEachWordAndMeaning = new StringTokenizer(stringRead,",");
         
-        for (char element : arrayOfWords){
-            if(element == '[' || element == ']'){continue;}
-            
-            String word = "";
-            String meaning = "";
-            
-            
-            
+        while(extractingEachWordAndMeaning.hasMoreTokens()){
+          arrayListOfData.add(extractingEachWordAndMeaning.nextToken());
+        }
+        
+        for(String i: arrayListOfData){
+           String[] wordAndMeaning = i.split(":");
+           availableWord.add(new Word(wordAndMeaning[0],wordAndMeaning[1]));
         }
     }
     

@@ -1,1 +1,1 @@
-[Ja:yes,Nein: no,danke: thanks,Hallo: hello, Guten Morgen: Good Morning, Guten Tag: Good Evening, Entschuldigung : Excuse me, Woche:  week , Jahr: Year, können: Can]
+Ja:yes,Nein:no,Danke:thanks,Hallo:hello,Guten Morgen:Good Morning,Guten Tag:Good Evening,Entschuldigung:Excuse me,Woche:week,Jahr:Year,Können:Can

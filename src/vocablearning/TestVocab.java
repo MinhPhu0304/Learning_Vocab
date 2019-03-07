@@ -35,7 +35,6 @@ public class TestVocab {
 
     private void testingGenerateQuestion() {
         for (int i = 0; i < NUMBER_QUESTION; i++){
-            questionList.add(new MultiChoiceQuestion("String","A String"));
         }
         
         for(Question i: questionList){
