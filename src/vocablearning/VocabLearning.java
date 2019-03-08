@@ -24,7 +24,7 @@ public class VocabLearning {
         final int EXIT = 3;
         
         AvailableWord wordList = new AvailableWord();
-        
+        TestVocab testVocab = new TestVocab(wordList.getAvailableWord());
         Scanner scan = new Scanner(System.in);
         
         //Start Menu asking for which modw the user wants to use
@@ -39,6 +39,7 @@ public class VocabLearning {
             
             String tempInput = scan.nextLine();
             
+            AvailableWord availableWords = new AvailableWord();
              //Checking if the user enter characters(which are invalid input) or an integer
             if(!tempInput.isEmpty()) // Check if the string is not empty in order 
             {
@@ -73,6 +74,9 @@ public class VocabLearning {
                 case TESTING_MODE:
                     //Code for the testing mode will be implemented here
                     System.out.println("Testing Mode(Placeholder)\n");
+                    //testVocab = new TestVocab(availableWords.getAvailableWord());
+                    MultiChoiceQuestion testQuestion = new MultiChoiceQuestion(new Word("test", "test"));
+                    testQuestion.printQuestion();
                     break;
                 case LEARNING_MODE:
                     //This is where the multichoice queestion will go

@@ -28,6 +28,9 @@ public class TestVocab {
     
     public void startTest(){
         
+        for(int i = 0; i < questionList.size(); i++) {
+            
+        }
         
     }
     
@@ -73,7 +76,7 @@ public class TestVocab {
                     questionList.add(new FillInTheBlankQuestion(wordList.get(wordPick)));
                     break;
                 case MULTICHOICE:
-                    
+                    questionList.add(new MultiChoiceQuestion(wordList.get(wordPick)));
                     break;
             }
         }

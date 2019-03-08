@@ -5,12 +5,18 @@
  */
 package vocablearning;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 /**
  *
  * @author Minh
  */
 public class MultiChoiceQuestion extends Question {
 
+    Random randomIndexGenerator = new Random();
     //REMEMBER TO ADD ARRAY_LIST OF AVAILABLE WORD
     public MultiChoiceQuestion(Word wordToConstructQuestion) {
         super(wordToConstructQuestion);
@@ -30,8 +36,37 @@ public class MultiChoiceQuestion extends Question {
     @Override
     public void printQuestion(){
         
+        AvailableWord availableWords = new AvailableWord();
+        List<Word> questions = generateUniqueAnswers(this, availableWords.getAvailableWord());
+        
+        System.out.println("What is the word for this definition: "+this.question);
+        String letter = "A";
+        for(int i = 0; i < 4; i++) {
+            letter = ""+(char)('A'+i);
+            System.out.println(letter+") "+questions.get(i).word);
+        }
     }
     
+    private List<Word> generateUniqueAnswers(MultiChoiceQuestion question, List<Word> wordList) {
+        
+        ArrayList<Word> questionsToPrint = new ArrayList<>(); // This ArrayList has the question which will be printed to to the console
+        questionsToPrint.add(new Word(this.answer, this.question));
+        for(int i =0; i < 4; i++) // There are going to be four potential answers 
+        {
+            int index = randomIndexGenerator.nextInt(wordList.size());
+            
+            if(!wordList.get(index).word.equals(question.answer)) // Checking if the random word is the same as test
+            {
+                // REMINDERL Add check that ensure that all words are unique in the list
+                questionsToPrint.add(wordList.get(index));
+            }
+            else
+                i--;
+        }
+        
+        Collections.shuffle(questionsToPrint); // Shuffling so that the right answer doesn't always appear first
+        return questionsToPrint;
+    }
     @Override
     public String toString(){
         return "Multichoice question";
