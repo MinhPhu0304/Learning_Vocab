@@ -49,13 +49,25 @@ public class TestVocab {
         }
     }
 
+    /**
+     * This class will only be called in the constructor of the class
+     * The main reason is that user might want another test so we can not used the 
+     *  same question before, the testVocab class can be initialized more than once depends
+     *  on how many tests user wanna take, NOTE: we don't store the wordList as private field
+     * The reason for not storing wordList for private field is because it will take more memory 
+     *  and the wordList is needed only for constructing question, after that it will not be needed
+     * @param wordList 
+     */
     private void generateQuestion(List<Word> wordList) {
         
-        Collections.shuffle(wordList);//calling more than once will affect performance
+        Collections.shuffle(wordList);//calling more than once will affect performance. 
+                                      //so it's best to call it before constructing testing question only
         
         for(int questionGenerate = 0; questionGenerate < NUMBER_QUESTION; questionGenerate++){
+            
             int questionType = randomQuestionTypePicker.nextInt(2);
             int wordPick = randomQuestionTypePicker.nextInt(wordList.size());
+            
             switch(questionType){
                 case FILL_IN_THE_BLANK:
                     questionList.add(new FillInTheBlankQuestion(wordList.get(wordPick)));
