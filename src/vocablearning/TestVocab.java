@@ -1,5 +1,6 @@
 package vocablearning;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 /**
@@ -22,7 +23,7 @@ public class TestVocab {
         randomQuestionTypePicker = new Random();
         questionList = new ArrayList<>();
         testingGenerateQuestion();//TESTING PURPOSE ONLY. DELETE WHEN FINISH
-        generateQuestion();                         
+        generateQuestion(wordList);                         
     }
     
     public void startTest(){
@@ -48,15 +49,19 @@ public class TestVocab {
         }
     }
 
-    private void generateQuestion() {
+    private void generateQuestion(List<Word> wordList) {
+        
+        Collections.shuffle(wordList);//calling more than once will affect performance
         
         for(int questionGenerate = 0; questionGenerate < NUMBER_QUESTION; questionGenerate++){
             int questionType = randomQuestionTypePicker.nextInt(2);
-            
+            int wordPick = randomQuestionTypePicker.nextInt(wordList.size());
             switch(questionType){
                 case FILL_IN_THE_BLANK:
+                    questionList.add(new FillInTheBlankQuestion(wordList.get(wordPick)));
                     break;
                 case MULTICHOICE:
+                    
                     break;
             }
         }
