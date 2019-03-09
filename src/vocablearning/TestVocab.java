@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 /**
  * @author Minh
  * Class is used for testing mode in the program
@@ -27,9 +28,13 @@ public class TestVocab {
     }
     
     public void startTest(){
-        
-        for(int i = 0; i < questionList.size(); i++) {
-            
+        Scanner scan = new Scanner(System.in);
+        String userInput = "";
+        for(int i = 0; i < questionList.size(); i++) { // This loops prints out the entire list of qestion and scans for input from the user
+            questionList.get(i).printQuestion();
+            userInput = scan.nextLine();
+           // score += (int)questionList.get(i).checkUserAnswer(userInput);
+           // Reminder: Implement code that checks the user's input and adds to the user's score
         }
         
     }

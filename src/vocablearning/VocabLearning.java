@@ -34,7 +34,7 @@ public class VocabLearning {
         {
             System.out.println("Menu");
             System.out.println("1) Testing Mode");
-            System.out.println("2) Multichoice");
+            System.out.println("2) Learning Mode");
             System.out.println("3) Exit");
             
             String tempInput = scan.nextLine();
@@ -74,13 +74,14 @@ public class VocabLearning {
                 case TESTING_MODE:
                     //Code for the testing mode will be implemented here
                     System.out.println("Testing Mode(Placeholder)\n");
-                    //testVocab = new TestVocab(availableWords.getAvailableWord());
-                    MultiChoiceQuestion testQuestion = new MultiChoiceQuestion(new Word("Guten Tag", "Good Evening"));
-                    testQuestion.printQuestion();
+                    testVocab = new TestVocab(availableWords.getAvailableWord());
+//                    MultiChoiceQuestion testQuestion = new MultiChoiceQuestion(new Word("Guten Tag", "Good Evening"));
+//                    testQuestion.printQuestion();
+                    testVocab.startTest();
                     break;
                 case LEARNING_MODE:
                     //This is where the multichoice queestion will go
-                    System.out.println("Multi choice Mode(Placeholder)\n");
+                    System.out.println("Learning Mode(Placeholder)\n");
                     break;
                 case EXIT:
                     System.out.println("Exiting Program...");
