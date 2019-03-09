@@ -75,7 +75,7 @@ public class VocabLearning {
                     //Code for the testing mode will be implemented here
                     System.out.println("Testing Mode(Placeholder)\n");
                     //testVocab = new TestVocab(availableWords.getAvailableWord());
-                    MultiChoiceQuestion testQuestion = new MultiChoiceQuestion(new Word("test", "test"));
+                    MultiChoiceQuestion testQuestion = new MultiChoiceQuestion(new Word("test", "test definition"));
                     testQuestion.printQuestion();
                     break;
                 case LEARNING_MODE:

@@ -51,7 +51,7 @@ public class MultiChoiceQuestion extends Question {
         
         ArrayList<Word> questionsToPrint = new ArrayList<>(); // This ArrayList has the question which will be printed to to the console
         questionsToPrint.add(new Word(this.answer, this.question));
-        for(int i =0; i < 4; i++) // There are going to be four potential answers 
+        for(int i =0; i < 3; i++) // There are going to be four potential answers 
         {
             int index = randomIndexGenerator.nextInt(wordList.size());
             
@@ -61,9 +61,29 @@ public class MultiChoiceQuestion extends Question {
                 questionsToPrint.add(wordList.get(index));
             }
             else
-                i--;
+                i--; // minus 1 from i so that it does another iteration to try get a unique answer
         }
         
+        ArrayList<Integer> elementsToChange = new ArrayList<>(); // This ArrayList will contains all the indices for the element that are not unique and need to be changed
+        for(int i = questionsToPrint.size()-1; i > 0; i--) {
+            for(int j =0; j < 4; j++) {
+                if(questionsToPrint.get(i).equals(questionsToPrint.get(j)) && !elementsToChange.contains(j) && !elementsToChange.contains(i) && i != j) { // Determine if it equals to any of the other indexes and if the index is not already in the ArrayList
+                    elementsToChange.add(i);
+                }
+            }
+        }
+        // This next loop finds a new word and swaps it with the ones that are not unique and need to be removed
+        for(int i =0; i < elementsToChange.size(); i++) {
+            int index = randomIndexGenerator.nextInt(wordList.size()); // getting the index for a random word in the word list
+            
+            int tempIndex = elementsToChange.get(i); // Saving the index of the word that needs to switch out
+            if(!questionsToPrint.get(tempIndex).equals(wordList.get(index))) { // Checking if the random word is the same as the word we want to remove
+                questionsToPrint.remove(questionsToPrint.get(tempIndex)); // Removing our duplicate word
+                questionsToPrint.add(wordList.get(index)); //adding the unqiue new word
+            }
+            else
+                i--; // If the new word is the same as our duplicate word we minus 1 from i so to the loop runs again and finds a new word
+        }
         Collections.shuffle(questionsToPrint); // Shuffling so that the right answer doesn't always appear first
         return questionsToPrint;
     }
