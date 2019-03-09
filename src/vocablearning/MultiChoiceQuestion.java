@@ -77,7 +77,7 @@ public class MultiChoiceQuestion extends Question {
             int index = randomIndexGenerator.nextInt(wordList.size()); // getting the index for a random word in the word list
             
             int tempIndex = elementsToChange.get(i); // Saving the index of the word that needs to switch out
-            if(!questionsToPrint.get(tempIndex).equals(wordList.get(index))) { // Checking if the random word is the same as the word we want to remove
+            if(!questionsToPrint.get(tempIndex).equals(wordList.get(index)) && !wordList.get(index).word.equals(question.answer)) { // Checking if the random word is the same as the word we want to remove
                 questionsToPrint.remove(questionsToPrint.get(tempIndex)); // Removing our duplicate word
                 questionsToPrint.add(wordList.get(index)); //adding the unqiue new word
             }
