@@ -8,7 +8,6 @@ package vocablearning;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 /**
  *
@@ -16,7 +15,7 @@ import java.util.Random;
  */
 public class MultiChoiceQuestion extends Question {
 
-    Random randomIndexGenerator = new Random();
+    
     //REMEMBER TO ADD ARRAY_LIST OF AVAILABLE WORD
     public MultiChoiceQuestion(Word wordToConstructQuestion) {
         super(wordToConstructQuestion);
