@@ -32,7 +32,6 @@ public class TestVocab {
         String userInput = "";
         for(int i = 0; i < questionList.size(); i++) { // This loops prints out the entire list of qestion and scans for input from the user
             questionList.get(i).printQuestion();
-            userInput = scan.nextLine();
            // score += (int)questionList.get(i).checkUserAnswer(userInput);
            // Reminder: Implement code that checks the user's input and adds to the user's score
         }
