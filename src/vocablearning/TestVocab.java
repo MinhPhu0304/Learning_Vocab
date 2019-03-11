@@ -28,14 +28,39 @@ public class TestVocab {
     }
     
     public void startTest(){
-        Scanner scan = new Scanner(System.in);
+        Scanner keyboard = new Scanner(System.in);
         String userInput = "";
-        for(int i = 0; i < questionList.size(); i++) { // This loops prints out the entire list of qestion and scans for input from the user
-            questionList.get(i).printQuestion();
-           // score += (int)questionList.get(i).checkUserAnswer(userInput);
-           // Reminder: Implement code that checks the user's input and adds to the user's score
+        int questionToPrint = 1; //we havent printed any yet
+        
+        for(Question currentQuestion:questionList){
+            
+            System.out.println("\n\nQuestion " + questionToPrint++);
+            currentQuestion.printQuestion();
+            userInput = keyboard.nextLine();
+            
+            if(currentQuestion instanceof MultiChoiceQuestion){
+                //The reason we pass  keyboard object is to not waste memory and time to 
+                // intialize another keyboard object
+                checkUserAnswerMultiChoice(userInput, keyboard);
+            } else{
+                
+            }
         }
         
+    }
+    
+    /**
+     * This will check for user input in the multi choice and performing loop
+     *  until user type the right question from the range
+     * The reason to have 2 different methods for multi choice and fill in the blank
+     *  is because the multi choice will have to perform a loop if necessary needed which
+     *      could make the loop start test ugly and messy
+     * @param userInput 
+     */
+    private void checkUserAnswerMultiChoice(String userInput, Scanner keyboard){
+        
+        
+    
     }
     
     public int getScore(){

@@ -41,7 +41,7 @@ public class MultiChoiceQuestion extends Question {
         List<Word> questions = generateUniqueAnswers(availableWords.getAvailableWord());
         
         System.out.println("What is the word for this definition: "+this.question);
-        String letter = "A";
+        String letter;
         for(int i = 0; i < NUMBER_CHOICES_PER_QUESTION; i++) {
             letter = ""+(char)('A'+i);
             System.out.println(letter+") "+questions.get(i).word);
