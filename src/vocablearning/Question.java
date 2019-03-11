@@ -20,7 +20,7 @@ abstract public class Question {
                                 //available word choices;
     }
     
-    protected abstract void generateQuestion();
+    protected abstract void generateQuestion();//Should change parameter
     public abstract void printQuestion();
     public abstract UserAnswerResult checkUserAnswer(String userInput);
     
