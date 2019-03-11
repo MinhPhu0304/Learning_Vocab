@@ -15,6 +15,8 @@ import java.util.List;
  */
 public class MultiChoiceQuestion extends Question {
 
+    private final int NUMBER_CHOICES_PER_QUESTION = 4;
+    
     
     //REMEMBER TO ADD ARRAY_LIST OF AVAILABLE WORD
     public MultiChoiceQuestion(Word wordToConstructQuestion) {
@@ -40,7 +42,7 @@ public class MultiChoiceQuestion extends Question {
         
         System.out.println("What is the word for this definition: "+this.question);
         String letter = "A";
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < NUMBER_CHOICES_PER_QUESTION; i++) {
             letter = ""+(char)('A'+i);
             System.out.println(letter+") "+questions.get(i).word);
         }
@@ -56,9 +58,12 @@ public class MultiChoiceQuestion extends Question {
             availableIndices.add(i);
         }
         
+        
         Collections.shuffle(availableIndices); // Shuffling the indices so they are random
         
-        for(int i =0; i < 3; i++) // This loop populates the QuestionToPrint arrayList with unique word from the word list so there will not be duplicates
+        // This loop populates the QuestionToPrint arrayList with unique word from the word list 
+        //  so there will not be duplicates
+        for(int i =0; i < NUMBER_CHOICES_PER_QUESTION - 1; i++) 
         {
             int tempIndex = availableIndices.get(i); // Saced the index from the Arra
             if(!wordList.get(tempIndex).word.equals(this.answer)) {
@@ -74,6 +79,7 @@ public class MultiChoiceQuestion extends Question {
         Collections.shuffle(questionsToPrint); // Shuffling so that the right answer doesn't always appear first
         return questionsToPrint;
     }
+    
     @Override
     public String toString(){
         return "Multichoice question";
@@ -88,8 +94,8 @@ public class MultiChoiceQuestion extends Question {
      */
     @Override
     public UserAnswerResult checkUserAnswer(String userInput){
-        return UserAnswerResult.UserCorrect;
         //NOT IMPLEMENTED YET
+        return UserAnswerResult.UserCorrect;
     }
     
 }

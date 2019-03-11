@@ -47,9 +47,19 @@ public class FillInTheBlankQuestion extends Question {
         }
     }
 
+    /**
+     * This will only return user correct or not
+     * Only Multi choice question will return another option
+     * @param userInput
+     * @return enumerate type which are userCorrect or userIncorrect.
+     */
     @Override
     public UserAnswerResult checkUserAnswer(String userInput) {
-        return UserAnswerResult.UserCorrect;
-        //NOT IMPLEMENTED YET
+       
+        if(userInput.equalsIgnoreCase(this.answer)){
+            return UserAnswerResult.UserCorrect;
+        }else{
+            return UserAnswerResult.UserIncorrect;
+        }
     }
 }
