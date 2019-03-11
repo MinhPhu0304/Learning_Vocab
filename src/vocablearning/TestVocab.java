@@ -13,8 +13,11 @@ public class TestVocab {
     private int score;
     private ArrayList<Question> questionList;
     
+    
     private final int MULTICHOICE = 0;
     private final int FILL_IN_THE_BLANK = 1;
+    private final int TOTAL_TYPE_OF_QUESTION = 2;
+    private final String AVAILABLE_MULTI_CHOICE_ANSWER = "ABCD";
     private final int NUMBER_QUESTION = 20;
     private final Random randomQuestionTypePicker;//This will be used to randomly choose between 
                                                   //multichoice or fill in the blank
@@ -34,14 +37,14 @@ public class TestVocab {
         
         for(Question currentQuestion:questionList){
             
-            System.out.println("\n\nQuestion " + questionToPrint++);
+            System.out.println("\nQuestion " + questionToPrint++);
             currentQuestion.printQuestion();
             userInput = keyboard.nextLine();
             
             if(currentQuestion instanceof MultiChoiceQuestion){
                 //The reason we pass  keyboard object is to not waste memory and time to 
                 // intialize another keyboard object
-                checkUserAnswerMultiChoice(userInput, keyboard);
+                checkUserAnswerMultiChoice(userInput, keyboard,(MultiChoiceQuestion)currentQuestion );
             } else{
                 
             }
@@ -57,10 +60,24 @@ public class TestVocab {
      *      could make the loop start test ugly and messy
      * @param userInput 
      */
-    private void checkUserAnswerMultiChoice(String userInput, Scanner keyboard){
+    private void checkUserAnswerMultiChoice(String userInput, Scanner keyboard, MultiChoiceQuestion currentQuestion){
         
-        
+        switch(currentQuestion.checkUserAnswer(userInput)){
+            case UserCorrect:
+                addPointForUser();
+                break;
+            case UserIncorrect:
+                break;
+            case MultiChoiceOutOfRange:
+                    System.out.print("Your answer is invalid please enter again: ");
+                    String userNewAnswer = keyboard.nextLine();
+                    checkUserAnswerMultiChoice(userNewAnswer,keyboard,currentQuestion);
+                    break;
+        }
+    }
     
+    private void  addPointForUser(){
+        
     }
     
     public int getScore(){
@@ -97,7 +114,7 @@ public class TestVocab {
         
         for(int questionGenerate = 0; questionGenerate < NUMBER_QUESTION; questionGenerate++){
             
-            int questionType = randomQuestionTypePicker.nextInt(2);
+            int questionType = randomQuestionTypePicker.nextInt(TOTAL_TYPE_OF_QUESTION);
             int wordPick = randomQuestionTypePicker.nextInt(wordList.size());
             
             switch(questionType){

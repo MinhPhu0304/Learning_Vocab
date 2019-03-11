@@ -43,12 +43,7 @@ public class VocabLearning {
              //Checking if the user enter characters(which are invalid input) or an integer
             if(!tempInput.isEmpty()) // Check if the string is not empty in order 
             {
-                /****************************************************
-                 * BAD ERROR CHECKING                               *
-                 *  WHEN USER TYPE INPUT SUCH AS 3K OR 2SADLFKJASD  *
-                 *      THE PROGRAM STILL TAKE IT AS A VALID INPUT  *
-                 *          THIS NEEDS TO BE REFACTORED             *
-                 ****************************************************/
+                
                 boolean isUserInputValid = true; // This variable indicates whether the input is valid so tempInput can be converted in to integer safetly
 
                 for(int characterIndex = 0; characterIndex < tempInput.length(); characterIndex++)
@@ -72,15 +67,12 @@ public class VocabLearning {
             
             switch (userInput) {
                 case TESTING_MODE:
-                    //Code for the testing mode will be implemented here
-                    System.out.println("Testing Mode(Placeholder)\n");
+                    
                     testVocab = new TestVocab(availableWords.getAvailableWord());
-//                    MultiChoiceQuestion testQuestion = new MultiChoiceQuestion(new Word("Guten Tag", "Good Evening"));
-//                    testQuestion.printQuestion();
                     testVocab.startTest();
                     break;
                 case LEARNING_MODE:
-                    //This is where the multichoice queestion will go
+                    
                     System.out.println("Learning Mode(Placeholder)\n");
                     break;
                 case EXIT:

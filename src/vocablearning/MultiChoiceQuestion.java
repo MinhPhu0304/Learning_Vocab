@@ -16,6 +16,7 @@ import java.util.List;
 public class MultiChoiceQuestion extends Question {
 
     private final int NUMBER_CHOICES_PER_QUESTION = 4;
+    private final String POSSIBLE_ANSWER = "ABCD";
     
     
     //REMEMBER TO ADD ARRAY_LIST OF AVAILABLE WORD
@@ -94,8 +95,14 @@ public class MultiChoiceQuestion extends Question {
      */
     @Override
     public UserAnswerResult checkUserAnswer(String userInput){
-        //NOT IMPLEMENTED YET
-        return UserAnswerResult.UserCorrect;
+        
+        boolean userAnswerLengthCorrect = userInput.length() == 1;
+        boolean userAnswerValid = userAnswerLengthCorrect && POSSIBLE_ANSWER.contains(userInput.toUpperCase());
+        
+        if(userAnswerValid){
+            return UserAnswerResult.UserCorrect;         
+        }
+        
+        return UserAnswerResult.MultiChoiceOutOfRange;
     }
-    
 }
