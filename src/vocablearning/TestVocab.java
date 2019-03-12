@@ -17,7 +17,6 @@ public class TestVocab {
     private final int MULTICHOICE = 0;
     private final int FILL_IN_THE_BLANK = 1;
     private final int TOTAL_TYPE_OF_QUESTION = 2;
-    private final String AVAILABLE_MULTI_CHOICE_ANSWER = "ABCD";
     private final int NUMBER_QUESTION = 20;
     private final Random randomQuestionTypePicker;//This will be used to randomly choose between 
                                                   //multichoice or fill in the blank
@@ -46,9 +45,30 @@ public class TestVocab {
                 // intialize another keyboard object
                 checkUserAnswerMultiChoice(userInput, keyboard,(MultiChoiceQuestion)currentQuestion );
             } else{
-                
+                userInput = convertUserInputToSpecialChar(userInput,(FillInTheBlankQuestion)currentQuestion);
+                checkUserAnswerFillInTheBlank(userInput);
             }
+        } 
+    }
+    
+    /**
+     * This method will perform change in the user Input if it detect user want
+     *  to type Ä or Ö or Ü
+     * User will type symbol '[' '[' or ';' to convert to those special character
+     * If user does not type any special symbol like that it will just return the same
+     * @param userInput
+     * @return converted string or just the same string
+     */
+    private String convertUserInputToSpecialChar(String userInput, FillInTheBlankQuestion currentQuestion){
+        
+        if(currentQuestion.containSpecialCharToConvert(userInput)){
+            
         }
+        
+        return userInput;       
+    }
+    
+    private void checkUserAnswerFillInTheBlank(String userInput){
         
     }
     
@@ -77,7 +97,7 @@ public class TestVocab {
     }
     
     private void  addPointForUser(){
-        
+        score++;
     }
     
     public int getScore(){
