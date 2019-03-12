@@ -63,13 +63,12 @@ public class TestVocab {
         
         if(currentQuestion.containSpecialCharToConvert(userInput)){
             
+        }else{
+            
         }
-        
-        return userInput;       
-    }
-    
-    private void checkUserAnswerFillInTheBlank(String userInput){
-        
+          
+          
+        //System.out.println("Your Score was "+ getScore());
     }
     
     /**
@@ -142,7 +141,7 @@ public class TestVocab {
                     questionList.add(new FillInTheBlankQuestion(wordList.get(wordPick)));
                     break;
                 case MULTICHOICE:
-                    questionList.add(new MultiChoiceQuestion(wordList.get(wordPick)));
+                    questionList.add(new MultiChoiceQuestion(wordList.get(wordPick), wordList));
                     break;
             }
         }
