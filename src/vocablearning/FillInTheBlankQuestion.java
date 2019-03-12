@@ -11,6 +11,10 @@ package vocablearning;
  */
 public class FillInTheBlankQuestion extends Question {
 
+    private final char CHARACTER_Ä_EQUIVALENT = '[';
+    private final char CHARACTER_Ö_EQUIVALENT = ']';
+    private final char CHARACTER_Ü_EQUIVALENT = ';';
+    
     public FillInTheBlankQuestion(Word wordToConstructQuestion) {
         super(wordToConstructQuestion);
     }
@@ -61,5 +65,14 @@ public class FillInTheBlankQuestion extends Question {
         }else{
             return UserAnswerResult.UserIncorrect;
         }
+    }
+    
+    public String convertSymbolToSpecialChar(String input){
+        return "";
+    }
+    
+    public boolean containSpecialCharToConvert(String userInput){
+        
+        return userInput.contains(Character.toString(CHARACTER_Ä_EQUIVALENT)) || userInput.contains(Character.toString(CHARACTER_Ö_EQUIVALENT)) || userInput.contains(Character.toString(CHARACTER_Ü_EQUIVALENT));
     }
 }
