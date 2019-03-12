@@ -17,11 +17,13 @@ public class MultiChoiceQuestion extends Question {
 
     private final int NUMBER_CHOICES_PER_QUESTION = 4;
     private final String POSSIBLE_ANSWER = "ABCD";
-    
+    private List<Word> wordList;
+    private List<Word> questions;
     
     //REMEMBER TO ADD ARRAY_LIST OF AVAILABLE WORD
-    public MultiChoiceQuestion(Word wordToConstructQuestion) {
+    public MultiChoiceQuestion(Word wordToConstructQuestion, List<Word> wordList) {
         super(wordToConstructQuestion);
+        this.wordList = wordList;
     }
     
     @Override
@@ -38,8 +40,7 @@ public class MultiChoiceQuestion extends Question {
     @Override
     public void printQuestion(){
         
-        AvailableWord availableWords = new AvailableWord();
-        List<Word> questions = generateUniqueAnswers(availableWords.getAvailableWord());
+        questions = generateUniqueAnswers(wordList);
         
         System.out.println("What is the word for this definition: "+this.question);
         String letter;
@@ -66,21 +67,14 @@ public class MultiChoiceQuestion extends Question {
         //  so there will not be duplicates
         for(int i =0; i < NUMBER_CHOICES_PER_QUESTION - 1; i++) 
         {
-            int tempIndex = availableIndices.get(i); // Saced the index from the Arra
-            if(!wordList.get(tempIndex).word.equals(this.answer)) {
-                questionsToPrint.add(wordList.get(tempIndex)); 
-                availableIndices.remove(i); // Remove the index we just used so we won't use it again by accident
-            }
-            else { // This else will trigger when the word w got was the same as our question's word so we minnus 1 from i and shuffle againso it redo this iteration
-                i--; 
-                Collections.shuffle(availableIndices);
-            }
+            int tempIndex = availableIndices.get(i); // Saved the index from the ArrayList
+            
+            questionsToPrint.add(wordList.get(tempIndex)); 
+            availableIndices.remove(i); // Remove the index we just used so we won't use it again by accident
         }
- 
         Collections.shuffle(questionsToPrint); // Shuffling so that the right answer doesn't always appear first
         return questionsToPrint;
     }
-    
     @Override
     public String toString(){
         return "Multichoice question";
@@ -100,7 +94,13 @@ public class MultiChoiceQuestion extends Question {
         boolean userAnswerValid = userAnswerLengthCorrect && POSSIBLE_ANSWER.contains(userInput.toUpperCase());
         
         if(userAnswerValid){
-            return UserAnswerResult.UserCorrect;         
+            int index = (int)userInput.toUpperCase().charAt(0)-65; //The letter the user entered is converted to an int i.e 'A' = 65 so minus 65 = 0 
+            if(questions.get(index).getWord().equals(this.answer)) { //Comparing the number that the user selected and comparing it the question's answer if they are the same than return UserCorrect
+                return UserAnswerResult.UserCorrect;         
+            }
+            else {
+                return UserAnswerResult.UserIncorrect;
+            }
         }
         
         return UserAnswerResult.MultiChoiceOutOfRange;

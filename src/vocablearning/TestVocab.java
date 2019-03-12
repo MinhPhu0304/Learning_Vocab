@@ -49,7 +49,7 @@ public class TestVocab {
                 
             }
         }
-        
+        System.out.println("Your Score was "+ getScore());
     }
     
     /**
@@ -77,7 +77,7 @@ public class TestVocab {
     }
     
     private void  addPointForUser(){
-        
+        score++;
     }
     
     public int getScore(){
@@ -122,7 +122,7 @@ public class TestVocab {
                     questionList.add(new FillInTheBlankQuestion(wordList.get(wordPick)));
                     break;
                 case MULTICHOICE:
-                    questionList.add(new MultiChoiceQuestion(wordList.get(wordPick)));
+                    questionList.add(new MultiChoiceQuestion(wordList.get(wordPick), wordList));
                     break;
             }
         }
