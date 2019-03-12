@@ -26,12 +26,21 @@ public class FillInTheBlankQuestion extends Question {
     @Override
     protected void generateQuestion() {}
 
+    private void printTypingGuide(){
+        
+        System.out.println("Notes: German has some special characters");
+        System.out.println("Press " + CHARACTER_Ä_EQUIVALENT+ " for Ä");
+        System.out.println("Press "+ CHARACTER_Ö_EQUIVALENT +" for Ö");
+        System.out.println("Press " + CHARACTER_Ü_EQUIVALENT+  " for Ü");
+    }
+    
     /**
      * Warning: this class only print out the question in a nice way,
      *  all userInput handling will be taken by the parent class.
      */
     @Override
     public void printQuestion() {
+        printTypingGuide();
         System.out.println("Enter the word that match with the meaning of it: ");
         printCensoredAnswer();
         System.out.print(": " + super.question + "\n");
@@ -68,7 +77,13 @@ public class FillInTheBlankQuestion extends Question {
     }
     
     public String convertSymbolToSpecialChar(String input){
-        return "";
+        String convertedString ;
+        
+        convertedString = input.replace(CHARACTER_Ä_EQUIVALENT, 'Ä');
+        convertedString = convertedString.replace(CHARACTER_Ö_EQUIVALENT,'Ö' );
+        convertedString = convertedString.replace(CHARACTER_Ü_EQUIVALENT,'Ü' );
+        
+        return convertedString;
     }
     
     public boolean containSpecialCharToConvert(String userInput){

@@ -27,9 +27,7 @@ public class MultiChoiceQuestion extends Question {
     }
     
     @Override
-    protected void generateQuestion() {
-        
-    }
+    protected void generateQuestion() {}
     
     /**
      * The reason we have this method is to print the question the suit the question type

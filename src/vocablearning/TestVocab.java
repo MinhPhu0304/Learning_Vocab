@@ -25,7 +25,6 @@ public class TestVocab {
         score = 0;
         randomQuestionTypePicker = new Random();
         questionList = new ArrayList<>();
-        testingGenerateQuestion();//TESTING PURPOSE ONLY. DELETE WHEN FINISH
         generateQuestion(wordList);                         
     }
     
@@ -45,8 +44,8 @@ public class TestVocab {
                 // intialize another keyboard object
                 checkUserAnswerMultiChoice(userInput, keyboard,(MultiChoiceQuestion)currentQuestion );
             } else{
-                userInput = convertUserInputToSpecialChar(userInput,(FillInTheBlankQuestion)currentQuestion);
-                checkUserAnswerFillInTheBlank(userInput);
+                userInput = convertInputToSpecialChar(keyboard,userInput,(FillInTheBlankQuestion)currentQuestion);
+                checkUserAnswerFillInTheBlank(userInput,currentQuestion);
             }
         } 
     }
@@ -59,16 +58,25 @@ public class TestVocab {
      * @param userInput
      * @return converted string or just the same string
      */
-    private String convertUserInputToSpecialChar(String userInput, FillInTheBlankQuestion currentQuestion){
+    private String convertInputToSpecialChar(Scanner keyboard , String userInput, FillInTheBlankQuestion currentQuestion){
         
         if(currentQuestion.containSpecialCharToConvert(userInput)){
-            
-        }else{
-            
+            String convertedInput = currentQuestion.convertSymbolToSpecialChar(userInput);
+            System.out.println("We converted your word into: " + convertedInput);
+            return convertedInput;
         }
-          
-          
-        //System.out.println("Your Score was "+ getScore());
+        return  userInput;
+    }   
+        
+    private void checkUserAnswerFillInTheBlank(String userInput,Question currentQuestion){
+        
+        switch(currentQuestion.checkUserAnswer(userInput)){
+            case UserCorrect:
+                addPointForUser();
+                break;
+            case UserIncorrect:
+                break;
+        }
     }
     
     /**
@@ -106,15 +114,6 @@ public class TestVocab {
     @Override
     public String toString(){
         return "Test class";
-    }
-
-    private void testingGenerateQuestion() {
-        for (int i = 0; i < NUMBER_QUESTION; i++){
-        }
-        
-        for(Question i: questionList){
-            System.out.println(i.toString());
-        }
     }
 
     /**
