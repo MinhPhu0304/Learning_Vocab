@@ -60,18 +60,23 @@ public class MultiChoiceQuestion extends Question {
         for(int i =0; i < wordList.size();i++) { // Populating th arryList with all the indices of the the word list
             availableIndices.add(i);
         }
-        
-        
         Collections.shuffle(availableIndices); // Shuffling the indices so they are random
         
+
         // This loop populates the QuestionToPrint arrayList with unique word from the word list 
         //  so there will not be duplicates
         for(int i = 0; i < NUMBER_CHOICES_PER_QUESTION - 1; i++) 
         {
-            int tempIndex = availableIndices.get(i); // Saved the index from the ArrayList
+            int tempIndex = availableIndices.get(0); // Saved the index from the ArrayList
             
-            questionsToPrint.add(wordList.get(tempIndex)); 
-            availableIndices.remove(i); // Remove the index we just used so we won't use it again by accident
+            if(!this.question.equals(wordList.get(tempIndex).meaning)) { //Checking if the random word is the answer if it not is add it, if it is -1 from i so it will doinf it again
+                questionsToPrint.add(wordList.get(tempIndex));
+            }
+            else {
+                i--; // minus 1 from i so the loop will run again and grab another word but we will still remove the index so we won't accidently grab it again
+            }
+            availableIndices.remove((Integer)tempIndex); // Remove the index we just used so we won't use it again by accident
+            
         }
         Collections.shuffle(questionsToPrint); // Shuffling so that the right answer doesn't always appear first
         return questionsToPrint;
