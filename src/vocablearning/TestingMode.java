@@ -9,7 +9,7 @@ import java.util.Scanner;
  * Class is used for testing mode in the program
  * The number of question should be around 20 questions per test
  */
-public class TestVocab {
+public class TestingMode {
     private int score;
     private ArrayList<Question> questionList;
     
@@ -21,7 +21,7 @@ public class TestVocab {
     private final Random randomQuestionTypePicker;//This will be used to randomly choose between 
                                                   //multichoice or fill in the blank
 
-    public TestVocab(List<Word> wordList){
+    public TestingMode(List<Word> wordList){
         score = 0;
         randomQuestionTypePicker = new Random();
         questionList = new ArrayList<>();
@@ -30,7 +30,7 @@ public class TestVocab {
     
     public void startTest(){
         Scanner keyboard = new Scanner(System.in);
-        String userInput = "";
+        String userInput;
         int questionToPrint = 1; //we havent printed any yet
         
         for(Question currentQuestion:questionList){
@@ -44,7 +44,7 @@ public class TestVocab {
                 // intialize another keyboard object
                 checkUserAnswerMultiChoice(userInput, keyboard,(MultiChoiceQuestion)currentQuestion );
             } else{
-                userInput = convertInputToSpecialChar(keyboard,userInput,(FillInTheBlankQuestion)currentQuestion);
+                userInput = convertInputToSpecialChar(userInput,(FillInTheBlankQuestion)currentQuestion);
                 checkUserAnswerFillInTheBlank(userInput,currentQuestion);
             }
         } 
@@ -58,7 +58,7 @@ public class TestVocab {
      * @param userInput
      * @return converted string or just the same string
      */
-    private String convertInputToSpecialChar(Scanner keyboard , String userInput, FillInTheBlankQuestion currentQuestion){
+    private String convertInputToSpecialChar(String userInput, FillInTheBlankQuestion currentQuestion){
         
         if(currentQuestion.containSpecialCharToConvert(userInput)){
             String convertedInput = currentQuestion.convertSymbolToSpecialChar(userInput);
@@ -98,6 +98,7 @@ public class TestVocab {
             case MultiChoiceOutOfRange:
                     System.out.print("Your answer is invalid please enter again: ");
                     String userNewAnswer = keyboard.nextLine();
+                    //recursively check for input again.
                     checkUserAnswerMultiChoice(userNewAnswer,keyboard,currentQuestion);
                     break;
         }

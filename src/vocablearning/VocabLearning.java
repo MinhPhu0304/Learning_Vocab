@@ -24,7 +24,7 @@ public class VocabLearning {
         final int EXIT = 3;
         
         AvailableWord wordList = new AvailableWord();
-        TestVocab testVocab = new TestVocab(wordList.getAvailableWord());
+        TestingMode testVocab = new TestingMode(wordList.getAvailableWord());
         Scanner scan = new Scanner(System.in);
         
         //Start Menu asking for which modw the user wants to use
@@ -68,8 +68,9 @@ public class VocabLearning {
             switch (userInput) {
                 case TESTING_MODE:
                     
-                    testVocab = new TestVocab(availableWords.getAvailableWord());
+                    testVocab = new TestingMode(availableWords.getAvailableWord());
                     testVocab.startTest();
+                    System.out.println("\nYou have answered "+testVocab.getScore() + " out of 20 questions");
                     break;
                 case LEARNING_MODE:
                     

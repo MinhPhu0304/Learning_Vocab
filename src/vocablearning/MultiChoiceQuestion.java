@@ -17,17 +17,19 @@ public class MultiChoiceQuestion extends Question {
 
     private final int NUMBER_CHOICES_PER_QUESTION = 4;
     private final String POSSIBLE_ANSWER = "ABCD";
-    private List<Word> wordList;
+    private final List<Word> wordList;
+    
     private List<Word> questions;
     
-    //REMEMBER TO ADD ARRAY_LIST OF AVAILABLE WORD
     public MultiChoiceQuestion(Word wordToConstructQuestion, List<Word> wordList) {
         super(wordToConstructQuestion);
         this.wordList = wordList;
     }
     
     @Override
-    protected void generateQuestion() {}
+    protected void generateQuestion() {
+    
+    }
     
     /**
      * The reason we have this method is to print the question the suit the question type
@@ -44,6 +46,7 @@ public class MultiChoiceQuestion extends Question {
         String letter;
         for(int i = 0; i < NUMBER_CHOICES_PER_QUESTION; i++) {
             letter = ""+(char)('A'+i);
+            
             System.out.println(letter+") "+questions.get(i).word);
         }
     }
@@ -63,7 +66,7 @@ public class MultiChoiceQuestion extends Question {
         
         // This loop populates the QuestionToPrint arrayList with unique word from the word list 
         //  so there will not be duplicates
-        for(int i =0; i < NUMBER_CHOICES_PER_QUESTION - 1; i++) 
+        for(int i = 0; i < NUMBER_CHOICES_PER_QUESTION - 1; i++) 
         {
             int tempIndex = availableIndices.get(i); // Saved the index from the ArrayList
             
