@@ -10,10 +10,10 @@ import java.util.Scanner;
  * The number of question should be around 20 questions per test
  */
 public class TestingMode {
+    
     private int score;
-    private ArrayList<Question> questionList;
     
-    
+    private final ArrayList<Question> questionList;//each test case should only have constant question
     private final int MULTICHOICE = 0;
     private final int FILL_IN_THE_BLANK = 1;
     private final int TOTAL_TYPE_OF_QUESTION = 2;
@@ -136,12 +136,16 @@ public class TestingMode {
             int questionType = randomQuestionTypePicker.nextInt(TOTAL_TYPE_OF_QUESTION);
             int wordPick = randomQuestionTypePicker.nextInt(wordList.size());
             
+            ArrayList<Word> availableWord = VocabLearning.WORD_LIST.getAvailableWord();
+            
             switch(questionType){
+                
                 case FILL_IN_THE_BLANK:
-                    questionList.add(new FillInTheBlankQuestion(wordList.get(wordPick)));
+                    questionList.add(new FillInTheBlankQuestion(availableWord.get(wordPick)));
                     break;
+                    
                 case MULTICHOICE:
-                    questionList.add(new MultiChoiceQuestion(wordList.get(wordPick), wordList));
+                    questionList.add(new MultiChoiceQuestion(availableWord.get(wordPick), availableWord));
                     break;
             }
         }

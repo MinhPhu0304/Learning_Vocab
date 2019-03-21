@@ -20,7 +20,7 @@ public class FillInTheBlankQuestion extends Question {
     }
     
     /**
-     * This is an empty method because fill in the blank only requires 
+     * Empty method because fill in the blank only requires 
      *  the word and its meaning.
      */
     @Override
@@ -76,6 +76,12 @@ public class FillInTheBlankQuestion extends Question {
         }
     }
     
+    /**
+     * Utility class to convert symbol to special German character, SO user
+     *  don't have to manually reconfigure keyboard language.
+     * @param input
+     * @return converted string
+     */
     public String convertSymbolToSpecialChar(String input){
         String convertedString ;
         
@@ -86,8 +92,13 @@ public class FillInTheBlankQuestion extends Question {
         return convertedString;
     }
     
+    
     public boolean containSpecialCharToConvert(String userInput){
         
-        return userInput.contains(Character.toString(CHARACTER_Ä_EQUIVALENT)) || userInput.contains(Character.toString(CHARACTER_Ö_EQUIVALENT)) || userInput.contains(Character.toString(CHARACTER_Ü_EQUIVALENT));
+        boolean contain_Ä_symbol = userInput.contains(Character.toString(CHARACTER_Ä_EQUIVALENT));
+        boolean contain_Ö_symbol = userInput.contains(Character.toString(CHARACTER_Ö_EQUIVALENT));
+        boolean cotain_Ü_symbol = userInput.contains(Character.toString(CHARACTER_Ü_EQUIVALENT));
+        
+        return contain_Ä_symbol || contain_Ö_symbol || cotain_Ü_symbol ;
     }
 }

@@ -10,6 +10,7 @@ package vocablearning;
  * @author Minh
  */
 abstract public class Question {
+    
     protected String question;//this will be based on the meaning of the word.
     protected String answer;  
     
@@ -24,6 +25,7 @@ abstract public class Question {
     public abstract void printQuestion();
     public abstract UserAnswerResult checkUserAnswer(String userInput);
     
+    @Override
     public String toString(){
         return "This question has a the word: " + this.answer + " and it means "+ this.question;
     }

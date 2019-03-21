@@ -69,7 +69,8 @@ public class MultiChoiceQuestion extends Question {
         {
             int tempIndex = availableIndices.get(0); // Saved the index from the ArrayList
             
-            if(!this.question.equals(wordList.get(tempIndex).meaning)) { //Checking if the random word is the answer if it not is add it, if it is -1 from i so it will doinf it again
+            //Checking if the random word is the answer if it not is add it, if it is -1 from i so it will doinf it again
+            if(!this.question.equals(wordList.get(tempIndex).meaning)) { 
                 questionsToPrint.add(wordList.get(tempIndex));
             }
             else {
@@ -100,9 +101,13 @@ public class MultiChoiceQuestion extends Question {
         boolean userAnswerValid = userAnswerLengthCorrect && POSSIBLE_ANSWER.contains(userInput.toUpperCase());
         
         if(userAnswerValid){
-            int index = (int)userInput.toUpperCase().charAt(0)-65; //The letter the user entered is converted to an int i.e 'A' = 65 so minus 65 = 0 
-            if(questions.get(index).getWord().equals(this.answer)) { //Comparing the number that the user selected and comparing it the question's answer if they are the same than return UserCorrect
-                return UserAnswerResult.UserCorrect;         
+            
+            //The letter the user entered is converted to an int i.e 'A' = 65 so minus 65 = 0 
+            int index = (int)userInput.toUpperCase().charAt(0)-65; 
+            
+            //Comparing the number that the user selected and comparing it the question's answer if they are the same than return UserCorrect
+            if(questions.get(index).getWord().equals(this.answer)) {
+                return UserAnswerResult.UserCorrect; 
             }
             else {
                 return UserAnswerResult.UserIncorrect;
