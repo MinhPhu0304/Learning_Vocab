@@ -103,10 +103,18 @@ public class MultiChoiceQuestion extends Question {
         if(userAnswerValid){
             
             //The letter the user entered is converted to an int i.e 'A' = 65 so minus 65 = 0 
-            int index = (int)userInput.toUpperCase().charAt(0)-65; 
+            int index = (int)userInput.toUpperCase().charAt(0)-65;
+            
+            //The word that the user inputted
+            String userAnswer = questions.get(index).getWord();
+            //The correct word
+            String correctAnswer = this.answer;
+            
+            //Boolean that determines if the user inputted the correct answer
+            Boolean checkAnswer = userAnswer.equals(correctAnswer);
             
             //Comparing the number that the user selected and comparing it the question's answer if they are the same than return UserCorrect
-            if(questions.get(index).getWord().equals(this.answer)) {
+            if(checkAnswer) {
                 return UserAnswerResult.UserCorrect; 
             }
             else {

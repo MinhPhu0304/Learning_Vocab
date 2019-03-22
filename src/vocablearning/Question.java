@@ -12,6 +12,14 @@ package vocablearning;
 abstract public class Question {
     
     protected String question;//this will be based on the meaning of the word.
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
     protected String answer;  
     
     public Question(Word wordToConstructQuestion){
