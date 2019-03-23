@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -39,7 +38,7 @@ public class LearningMode {
     public void startLearning(){
         
         Iterator iterator = wordsToLearn.iterator();
-        
+       
         boolean userFinishedLearning = false;
         
         do{
@@ -57,8 +56,46 @@ public class LearningMode {
      */
     private void startSmallTest(){
         
+        printWords();
+        String userInput = ""; 
+        int questionNumber = 1; // This variable indicates the question number that the user is current on
+      
+        for (int i = 0; i < NUMBER_WORDS_TO_LEARN; i++) {
+            //Saving the question the current question into a temporary variable
+            FillInTheBlankQuestion currentQuestion = questionList.get(i); 
+            
+            System.out.println("\nQuestion " + questionNumber);
+            currentQuestion.printQuestion();
+            userInput = kb.nextLine();
+
+            //Checking the answer
+            UserAnswerResult checkAnswer = currentQuestion.checkUserAnswer(userInput);
+
+            if (checkAnswer == UserAnswerResult.UserCorrect) {
+                System.out.println("That is correct");
+            } else {
+                System.out.println("That is incorrect the answer was " + currentQuestion.answer);
+            }
+        }
     }
-    
+
+    private void printWords() {
+        System.out.println("Try to remember the following words, you will be tested on them:\n");
+        
+        for (int i = 0; i < NUMBER_WORDS_TO_LEARN; i++) {
+            System.out.println(wordsToLearn.get(i).word + " means " + wordsToLearn.get(i).meaning + " in english");
+        }
+
+        System.out.println("Press Enter to continue...");
+        kb.nextLine();
+
+        //Clearing the console
+        //Could'nt find a way to clear the console properly so just ran for loop printing out new lines
+        for (int i = 0; i < 10; i++) {
+            System.out.println("\n\n");
+        }
+
+    }
     private void generateQuestions(){ 
         
         //Static variable to optimize performance from not reading file many times
@@ -86,6 +123,6 @@ public class LearningMode {
         //Learning mode from random words
         LearningMode learn = new LearningMode(5);
         
-        learn.startLearning();
+        learn.startSmallTest();
     }
 }

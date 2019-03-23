@@ -65,8 +65,7 @@ public class MultiChoiceQuestion extends Question {
 
         // This loop populates the QuestionToPrint arrayList with unique word from the word list 
         //  so there will not be duplicates
-        for(int i = 0; i < NUMBER_CHOICES_PER_QUESTION - 1; i++) 
-        {
+        for(int i = 0; i < NUMBER_CHOICES_PER_QUESTION - 1; i++) {
             int tempIndex = availableIndices.get(0); // Saved the index from the ArrayList
             
             //Checking if the random word is the answer if it not is add it, if it is -1 from i so it will doinf it again

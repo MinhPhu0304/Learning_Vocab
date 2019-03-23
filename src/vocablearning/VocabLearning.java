@@ -39,27 +39,22 @@ public class VocabLearning {
             String tempInput = scan.nextLine();
             
              //Checking if the user enter characters(which are invalid input) or an integer
-            if(!tempInput.isEmpty()) // Check if the string is not empty in order 
-            {
-                
+            if (!tempInput.isEmpty()) {// Check if the string is not empty in order 
+            
                 boolean isUserInputValid = true; // This variable indicates whether the input is valid so tempInput can be converted in to integer safetly
 
-                for(int characterIndex = 0; characterIndex < tempInput.length(); characterIndex++)
-                {
-                    if(!Character.isDigit(tempInput.charAt(characterIndex)))
-                    {
+                for (int characterIndex = 0; characterIndex < tempInput.length(); characterIndex++) {
+                    if (!Character.isDigit(tempInput.charAt(characterIndex))) {
                         isUserInputValid = false;
                         userInput = 0; //Since the input is not a number set userInput to an invalid number so they will have to renter
                     }
                 }
-                
-                if(isUserInputValid && tempInput.length() < 10) // checking if the number doesn't have any letter also check if the string length is less than 10(as there is no option tht require 10 numberic character) in order to avoid parse a number to big which will cause an exception 
+
+                if (isUserInputValid && tempInput.length() < 10) // checking if the number doesn't have any letter also check if the string length is less than 10(as there is no option tht require 10 numberic character) in order to avoid parse a number to big which will cause an exception 
                 {
                     userInput = Integer.parseInt(tempInput);
-                }
-                else
-                {
-                userInput = 0;
+                } else {
+                    userInput = 0;
                 }
             }
             
