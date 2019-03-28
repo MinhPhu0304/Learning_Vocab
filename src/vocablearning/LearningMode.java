@@ -5,6 +5,7 @@
  */
 package vocablearning;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -25,16 +26,64 @@ public class LearningMode {
 
     private LinkedList<Word> wordsToLearn;
     private ArrayList<FillInTheBlankQuestion> questionList; //This is the question list which stores the questions that are randomly selected from the wordlist
-    
+    private ArrayList<User> userList;
+    private User currentUser;
+   
     public LearningMode(int numberWordsToLearn){
         kb = new Scanner(System.in);
         NUMBER_WORDS_TO_LEARN = numberWordsToLearn;
         questionList = new ArrayList<>();
         wordsToLearn = new LinkedList<>();
+        userList = new ArrayList<>();
         this.generateQuestions();
+        this.askUserName();
     }
     
+    /**
+     * This method takes in the user's input and then takes checks it with the existing users
+     * If the username already exist then it loads that user's index
+     */
+    private void askUserName() {
+        System.out.println("Please enter your username: ");
+        String userName = kb.nextLine();
+
+        currentUser = new User(userName, 0);
+        
+        //Creating a UserListGenerator which handle in the file input
+        UserListGenerator userListGenerator = new UserListGenerator(userList);
+        
+        //Saving the user list from file in to the program user list file
+        userList = userListGenerator.getUserList();
+        
+        //Checking if the name already exist
+        boolean isNameAlreadyExist = checkNameAlreadyExist();
+        
+        if (isNameAlreadyExist) {
+            System.out.println("Loaded your previous results...");
+        }
+        else {
+            //Since the user doesn't exi
+            userList.add(currentUser);
+        }
+        
+        //Save the user list
+        userListGenerator.saveUserList();
+    }
     
+    private boolean checkNameAlreadyExist()
+    {
+        //Checking every user in the list and checking the name 
+        for(int i =0; i < userList.size(); i++) {
+            if(currentUser.getUserName().equalsIgnoreCase(userList.get(i).getUserName()))
+            {
+                //Assigning the previously saved user and saving inot a currentUser varaible
+                currentUser = userList.get(i);
+                return true;
+            }
+        }
+        //If the name does not exist then return false
+        return false;
+    }
     public void startLearning(){
         
         Iterator iterator = wordsToLearn.iterator();
@@ -115,6 +164,7 @@ public class LearningMode {
             questionList.add(new FillInTheBlankQuestion(wordList.get(i)));
         }
     }
+    
     
     //Main is for testing prurposes will use later
     public static void main(String[] args){
