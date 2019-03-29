@@ -23,7 +23,7 @@ public class VocabLearning {
         final int EXIT = 3;
         
         TestingMode testVocab;
-        Scanner scan = new Scanner(System.in);
+        Scanner kb = new Scanner(System.in);
         
         //Start Menu asking for which mode the user wants to use
         // User input for the menu, seet to 0 as that is a valid condition for the following loop 
@@ -31,54 +31,66 @@ public class VocabLearning {
         
         while(userInput != EXIT) 
         {
-            System.out.println("Menu");
-            System.out.println("1) Testing Mode");
-            System.out.println("2) Learning Mode");
-            System.out.println("3) Exit");
+                       
+            userInput = getUserChoice(kb);
             
-            String tempInput = scan.nextLine();
-            
-             //Checking if the user enter characters(which are invalid input) or an integer
-            if (!tempInput.isEmpty()) {// Check if the string is not empty in order 
-            
-                boolean isUserInputValid = true; // This variable indicates whether the input is valid so tempInput can be converted in to integer safetly
-
-                for (int characterIndex = 0; characterIndex < tempInput.length(); characterIndex++) {
-                    if (!Character.isDigit(tempInput.charAt(characterIndex))) {
-                        isUserInputValid = false;
-                        userInput = 0; //Since the input is not a number set userInput to an invalid number so they will have to renter
-                    }
-                }
-
-                if (isUserInputValid && tempInput.length() < 10) // checking if the number doesn't have any letter also check if the string length is less than 10(as there is no option tht require 10 numberic character) in order to avoid parse a number to big which will cause an exception 
-                {
-                    userInput = Integer.parseInt(tempInput);
-                } else {
-                    userInput = 0;
-                }
-            }
-            
+            //No need for default since getUserChoice already include error handling
             switch (userInput) {
                 case TESTING_MODE:
                     
                     testVocab = new TestingMode(WORD_LIST.getAvailableWord());
                     testVocab.startTest();
                     System.out.println("\nYou have answered "+testVocab.getScore() + " out of 20 questions");
+                    
                     break;
                 case LEARNING_MODE:
                     
                     LearningMode learningMode = new LearningMode(5);//testing only
+                    learningMode.startLearning();
                     break;
                 case EXIT:
                     System.out.println("Exiting Program...");
                     System.exit(0);
-                default:
-                    System.out.println("Invalid Input! Please enter a valid input!\n");
-                    break;
             }
-          
         }
         
+    }
+    
+    public static int getUserChoice(Scanner kb){
+        
+        boolean userChoiceValid = false;//assumption is made here since user has not typed in anything yet
+        String userEnter; //What user enter may not be valid
+        int userChoice = 0;
+        do {
+            System.out.println("Menu");
+            System.out.println("1) Testing Mode");
+            System.out.println("2) Learning Mode");
+            System.out.println("3) Exit");
+            System.out.print("Enter your choice:");
+            
+            userEnter = kb.nextLine();
+            boolean userChoiceOutOfRange;
+            try {
+                userChoice = Integer.parseInt(userEnter);
+                userChoiceOutOfRange = userChoice <1 || userChoice > 3;
+                
+                if(userChoiceOutOfRange) throw new Exception("Error: The choice is out range");
+                
+                userChoiceValid = true;
+                
+            }catch(NumberFormatException e){
+                System.out.println("\nError: Please enter a number instead\n\n");
+            }catch(Exception e){
+                //Number format exception message is more common
+                if(!(e instanceof NumberFormatException)){
+                    System.out.println("\n"+e.getMessage() + "\n\n");
+                }
+            }
+            
+            
+        }while(!userChoiceValid);
+        
+        return userChoice;
     }
     
 }

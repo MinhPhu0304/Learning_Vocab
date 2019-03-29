@@ -19,9 +19,6 @@ import java.util.Scanner;
 public class LearningMode {
     
     private final Scanner kb;
-    private final char USER_QUIT = 'q';
-    private final char USER_CHOOSE_NEXT = 'n';
-    private final char USER_CHOOSE_BACK = 'b';
     private final int NUMBER_WORDS_TO_LEARN; // This variable stores how much question that the user wants to learn
 
     private LinkedList<Word> wordsToLearn;
@@ -36,7 +33,7 @@ public class LearningMode {
         wordsToLearn = new LinkedList<>();
         userList = new ArrayList<>();
         this.generateQuestions();
-        this.askUserName();
+        askUserName();
     }
     
     /**
@@ -106,20 +103,18 @@ public class LearningMode {
     private void startSmallTest(){
         
         printWords();
-        String userInput = ""; 
-        int questionNumber = 1; // This variable indicates the question number that the user is current on
-      
-        for (int i = 0; i < NUMBER_WORDS_TO_LEARN; i++) {
+        String userInput;
+        
+        for (int currentQuestionNumber = 0; currentQuestionNumber < NUMBER_WORDS_TO_LEARN; currentQuestionNumber++) {
             //Saving the question the current question into a temporary variable
-            FillInTheBlankQuestion currentQuestion = questionList.get(i); 
+            FillInTheBlankQuestion currentQuestion = questionList.get(currentQuestionNumber); 
             
-            System.out.println("\nQuestion " + questionNumber);
+            //Adding 1 to print out more user friendly question number
+            System.out.println("\nQuestion " + (currentQuestionNumber + 1));
             currentQuestion.printQuestion();
             userInput = kb.nextLine();
 
-            //Checking the answer
             UserAnswerResult checkAnswer = currentQuestion.checkUserAnswer(userInput);
-
             if (checkAnswer == UserAnswerResult.UserCorrect) {
                 System.out.println("That is correct");
             } else {
@@ -132,7 +127,7 @@ public class LearningMode {
         System.out.println("Try to remember the following words, you will be tested on them:\n");
         
         for (int i = 0; i < NUMBER_WORDS_TO_LEARN; i++) {
-            System.out.println(wordsToLearn.get(i).word + " means " + wordsToLearn.get(i).meaning + " in english");
+            System.out.println(wordsToLearn.get(i).word + " : " + wordsToLearn.get(i).meaning + " in english");
         }
 
         System.out.println("Press Enter to continue...");
@@ -140,11 +135,12 @@ public class LearningMode {
 
         //Clearing the console
         //Could'nt find a way to clear the console properly so just ran for loop printing out new lines
-        for (int i = 0; i < 10; i++) {
-            System.out.println("\n\n");
+        for (int i = 0; i < 5; i++) {
+            System.out.println("\n");
         }
 
     }
+    
     private void generateQuestions(){ 
         
         //Static variable to optimize performance from not reading file many times
@@ -165,6 +161,13 @@ public class LearningMode {
         }
     }
     
+    private int promptUserNumberWordToLearn(){
+        
+        System.out.println("Hello " + currentUser.userName);
+        
+        
+        return 0;
+    }
     
     //Main is for testing prurposes will use later
     public static void main(String[] args){
