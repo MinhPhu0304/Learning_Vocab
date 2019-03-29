@@ -58,39 +58,12 @@ public class VocabLearning {
     
     public static int getUserChoice(Scanner kb){
         
-        boolean userChoiceValid = false;//assumption is made here since user has not typed in anything yet
-        String userEnter; //What user enter may not be valid
-        int userChoice = 0;
-        do {
-            System.out.println("Menu");
-            System.out.println("1) Testing Mode");
-            System.out.println("2) Learning Mode");
-            System.out.println("3) Exit");
-            System.out.print("Enter your choice:");
-            
-            userEnter = kb.nextLine();
-            boolean userChoiceOutOfRange;
-            try {
-                userChoice = Integer.parseInt(userEnter);
-                userChoiceOutOfRange = userChoice <1 || userChoice > 3;
-                
-                if(userChoiceOutOfRange) throw new Exception("Error: The choice is out range");
-                
-                userChoiceValid = true;
-                
-            }catch(NumberFormatException e){
-                System.out.println("\nError: Please enter a number instead\n\n");
-            }catch(Exception e){
-                //Number format exception message is more common
-                if(!(e instanceof NumberFormatException)){
-                    System.out.println("\n"+e.getMessage() + "\n\n");
-                }
-            }
-            
-            
-        }while(!userChoiceValid);
+        String promptMessage = "Menu\n";
+        promptMessage += "1) Testing Mode\n";
+        promptMessage += "2) Learning Mode\n";
+        promptMessage += "3) Exit\n";
         
-        return userChoice;
+        return Utility.getUserInputOfNumberOnly(kb, 1, 3, promptMessage);
     }
     
 }

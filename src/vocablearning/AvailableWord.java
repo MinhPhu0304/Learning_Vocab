@@ -22,9 +22,7 @@ import java.util.StringTokenizer;
 public class AvailableWord {
     
     private final String availableWordFileURL = "./AvailableWord.txt";
-    private final int END_OF_FILE = -1;
     private ArrayList<Word> availableWord;
-    
     
     public AvailableWord(){
         

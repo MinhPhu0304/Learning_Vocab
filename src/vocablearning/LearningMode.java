@@ -25,7 +25,18 @@ public class LearningMode {
     private ArrayList<FillInTheBlankQuestion> questionList; //This is the question list which stores the questions that are randomly selected from the wordlist
     private ArrayList<User> userList;
     private User currentUser;
-   
+    
+    
+    public LearningMode(){
+        kb = new Scanner(System.in);
+        questionList = new ArrayList<>();
+        wordsToLearn = new LinkedList<>();
+        userList = new ArrayList<>();
+        this.generateQuestions();
+        askUserName();
+        NUMBER_WORDS_TO_LEARN = getUserNumberWordsLearn();
+    }
+    
     public LearningMode(int numberWordsToLearn){
         kb = new Scanner(System.in);
         NUMBER_WORDS_TO_LEARN = numberWordsToLearn;
@@ -52,35 +63,34 @@ public class LearningMode {
         //Saving the user list from file in to the program user list file
         userList = userListGenerator.getUserList();
         
-        //Checking if the name already exist
         boolean isNameAlreadyExist = checkNameAlreadyExist();
         
         if (isNameAlreadyExist) {
             System.out.println("Loaded your previous results...");
         }
         else {
-            //Since the user doesn't exi
+            System.out.println("Hi there, " + currentUser.getUserName());
             userList.add(currentUser);
         }
-        
-        //Save the user list
+
         userListGenerator.saveUserList();
     }
     
-    private boolean checkNameAlreadyExist()
-    {
-        //Checking every user in the list and checking the name 
-        for(int i =0; i < userList.size(); i++) {
-            if(currentUser.getUserName().equalsIgnoreCase(userList.get(i).getUserName()))
-            {
-                //Assigning the previously saved user and saving inot a currentUser varaible
-                currentUser = userList.get(i);
+    private boolean checkNameAlreadyExist(){
+        
+        for(User i: userList){
+            
+            String currentUserName = currentUser.getUserName();
+            String currentElementUserName = i.getUserName();
+            if(currentUserName.equalsIgnoreCase(currentElementUserName)){
+                currentUser = i;
                 return true;
             }
         }
-        //If the name does not exist then return false
+        
         return false;
     }
+    
     public void startLearning(){
         
         Iterator iterator = wordsToLearn.iterator();
@@ -95,6 +105,7 @@ public class LearningMode {
             
         }while(!userFinishedLearning);
         
+        startSmallTest();
     }
     
     /**
@@ -164,9 +175,21 @@ public class LearningMode {
     private int promptUserNumberWordToLearn(){
         
         System.out.println("Hello " + currentUser.userName);
+        System.out.println("How many words to you want to learn today: ");
         
+        int numberWordsUserWillLearn = getUserNumberWordsLearn();
         
         return 0;
+    }
+    
+    private int getUserNumberWordsLearn() {        
+        
+        //Bad chaining method here
+        int numberWordsAvailable = VocabLearning.WORD_LIST.getAvailableWord().size();
+        String promptMessage = "Hi, " + currentUser.getUserName() + ".\nHow many words to you want to learn today";
+        promptMessage += "( maximum number is " + numberWordsAvailable+ " )" ;
+
+        return Utility.getUserInputOfNumberOnly(kb, 0, numberWordsAvailable, promptMessage);
     }
     
     //Main is for testing prurposes will use later
@@ -174,8 +197,10 @@ public class LearningMode {
         
         //Each time user choose learning mode we will have to contruct new 
         //Learning mode from random words
-        LearningMode learn = new LearningMode(5);
+        LearningMode learn = new LearningMode();
         
         learn.startSmallTest();
     }
+
+   
 }

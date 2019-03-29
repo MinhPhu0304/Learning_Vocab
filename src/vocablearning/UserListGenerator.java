@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 
 /**
  * This class is similar to the AvailableWord in which that it handles
- * the file input and output of the file
+ * the file input and output of the user data
  * @author Millan
  */
 public class UserListGenerator {
@@ -28,8 +28,7 @@ public class UserListGenerator {
     private final String userFile = "./UserList.txt";
     private final File fileURLToRead;
     
-    public UserListGenerator(ArrayList<User> userList)
-    {
+    public UserListGenerator(ArrayList<User> userList){
         this.userList = userList;
         fileURLToRead = new File(userFile);
         readFile();
@@ -43,7 +42,9 @@ public class UserListGenerator {
         try {
             BufferedReader bufferedFile = new BufferedReader(
                     new InputStreamReader(new FileInputStream(fileURLToRead)));
+            
             readInInputFromFIle(bufferedFile);
+            
         } catch (FileNotFoundException error) {
             System.err.println("File not found");
         } catch (IOException exception) {
@@ -93,8 +94,7 @@ public class UserListGenerator {
     /**
      * This method outputs the program's userList to the UserList.txt file
      */
-    public void saveUserList()
-    {
+    public void saveUserList(){
         File userListFile = new File("./UserList.txt");
         try {
             PrintWriter writer = new PrintWriter(userListFile);
@@ -117,6 +117,5 @@ public class UserListGenerator {
     public ArrayList<User> getUserList() {
         return userList;
     }
-    
     
 }
