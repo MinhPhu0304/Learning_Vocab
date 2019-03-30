@@ -20,15 +20,13 @@ import java.util.StringTokenizer;
  * @author Minh
  */
 public class AvailableWord {
-    
     private final String availableWordFileURL = "./AvailableWord.txt";
     private ArrayList<Word> availableWord;
     
-    public AvailableWord(){
-        
+    public AvailableWord() {
         availableWord = new ArrayList<>();
         File fileURLToRead = new File(availableWordFileURL);
-        try{
+        try {
             //The default of the file reader is UTF-8
             //UTF-8 does not include all German alphabet.
             //From the souce on Stackoverflow the right encoding is ISO-8859-1
@@ -38,14 +36,14 @@ public class AvailableWord {
                                           new FileInputStream(fileURLToRead),"ISO-8859-1"));
             readInAvailableWordList(bufferedFile);
         }
-        catch(FileNotFoundException error){
+        catch (FileNotFoundException error) {
             System.err.println("File not found,please check the file url");
             System.err.println(error);
         }
-        catch (IOException exception){
+        catch (IOException exception) {
             //Since FileNotFoundException has been catched so we do not need to 
             // reprint the exception again
-            if( !(exception instanceof FileNotFoundException)){
+            if (!(exception instanceof FileNotFoundException)) {
                 System.err.println(exception.getMessage());
             }
         }
@@ -57,36 +55,34 @@ public class AvailableWord {
      * @param buffer
      * @throws IOException 
      */
-    private void readInAvailableWordList(BufferedReader buffer) throws IOException{
-        
+    private void readInAvailableWordList(BufferedReader buffer) throws IOException {
         String stringRead = "";
         String line;
-        if(buffer.ready()){
-            while((line = buffer.readLine()) != null){
+
+        if (buffer.ready()) {
+            while ((line = buffer.readLine()) != null) {
                 stringRead += line;
             }
             buffer.close();
         }
         constructWordList(stringRead);
     }
-    
-    
-    private void constructWordList(String stringRead){
-        
+
+    private void constructWordList(String stringRead) {
         ArrayList<String> arrayListOfData = new ArrayList<>();
         StringTokenizer extractingEachWordAndMeaning = new StringTokenizer(stringRead.trim(),",");
         
         //get all data from the tokenizer first
-        while(extractingEachWordAndMeaning.hasMoreTokens()){
-          arrayListOfData.add(extractingEachWordAndMeaning.nextToken());
+        while (extractingEachWordAndMeaning.hasMoreTokens()) {
+            arrayListOfData.add(extractingEachWordAndMeaning.nextToken());
         }
         
         //loop through the data available then construct word object 
         //The left hand side of the colon would be the word
         //The right hand side of the colon would be meaning
-        for(String i: arrayListOfData){
-           String[] wordAndMeaning = i.split(":");
-           availableWord.add(new Word(wordAndMeaning[0],wordAndMeaning[1]));
+        for (String i : arrayListOfData) {
+            String[] wordAndMeaning = i.split(":");
+            availableWord.add(new Word(wordAndMeaning[0], wordAndMeaning[1]));
         }
     }
     
@@ -94,7 +90,7 @@ public class AvailableWord {
      * Get all available word.
      * @return ArrayList of word.
      */
-    public ArrayList<Word> getAvailableWord(){
+    public ArrayList<Word> getAvailableWord() {
         return availableWord;
-    }  
+    }
 }

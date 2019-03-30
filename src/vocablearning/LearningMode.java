@@ -17,7 +17,6 @@ import java.util.Scanner;
  * @author Minh
  */
 public class LearningMode {
-    
     private final Scanner kb;
     private final int NUMBER_WORDS_TO_LEARN; // This variable stores how much question that the user wants to learn
 
@@ -27,24 +26,25 @@ public class LearningMode {
     private User currentUser;
     
     
-    public LearningMode(){
+    public LearningMode() {
         kb = new Scanner(System.in);
         questionList = new ArrayList<>();
         wordsToLearn = new LinkedList<>();
         userList = new ArrayList<>();
-        this.generateQuestions();
         askUserName();
         NUMBER_WORDS_TO_LEARN = getUserNumberWordsLearn();
+        this.generateQuestions();
     }
     
-    public LearningMode(int numberWordsToLearn){
+    public LearningMode(int numberWordsToLearn) {
         kb = new Scanner(System.in);
         NUMBER_WORDS_TO_LEARN = numberWordsToLearn;
         questionList = new ArrayList<>();
         wordsToLearn = new LinkedList<>();
         userList = new ArrayList<>();
-        this.generateQuestions();
+
         askUserName();
+        this.generateQuestions();
     }
     
     /**
@@ -59,7 +59,6 @@ public class LearningMode {
         
         //Creating a UserListGenerator which handle in the file input
         UserListGenerator userListGenerator = new UserListGenerator(userList);
-        
         //Saving the user list from file in to the program user list file
         userList = userListGenerator.getUserList();
         
@@ -72,38 +71,40 @@ public class LearningMode {
             System.out.println("Hi there, " + currentUser.getUserName());
             userList.add(currentUser);
         }
-
         userListGenerator.saveUserList();
     }
     
-    private boolean checkNameAlreadyExist(){
-        
-        for(User i: userList){
-            
+    /**
+     * Go through the entire user list and check the current user's username
+     * with the list's username if there is already username then it returns true
+     * @return a boolean which indicates whether the name already exist
+     */
+    private boolean checkNameAlreadyExist() {
+        //Checking every user in the list and checking the name
+        for (User i : userList) {
             String currentUserName = currentUser.getUserName();
             String currentElementUserName = i.getUserName();
-            if(currentUserName.equalsIgnoreCase(currentElementUserName)){
+            if (currentUserName.equalsIgnoreCase(currentElementUserName)) {
+                //Assigning the previously saved user and saving inot a currentUser varaible
                 currentUser = i;
                 return true;
             }
         }
-        
+        //If the name does not exist then return false
         return false;
     }
     
-    public void startLearning(){
+    public void startLearning() {
         
         Iterator iterator = wordsToLearn.iterator();
-       
         boolean userFinishedLearning = false;
         
-        do{
+        do {
             //I will finish this
             //Dont make it messy 
             //Please finish the start Small Test method
-            
-            
-        }while(!userFinishedLearning);
+
+        } while (!userFinishedLearning);
         
         startSmallTest();
     }
@@ -111,15 +112,15 @@ public class LearningMode {
     /**
      * This will be used to see how many words user learn, After user learn all the words.
      */
-    private void startSmallTest(){
+    private void startSmallTest() {
         
         printWords();
         String userInput;
-        
+
         for (int currentQuestionNumber = 0; currentQuestionNumber < NUMBER_WORDS_TO_LEARN; currentQuestionNumber++) {
             //Saving the question the current question into a temporary variable
-            FillInTheBlankQuestion currentQuestion = questionList.get(currentQuestionNumber); 
-            
+            FillInTheBlankQuestion currentQuestion = questionList.get(currentQuestionNumber);
+
             //Adding 1 to print out more user friendly question number
             System.out.println("\nQuestion " + (currentQuestionNumber + 1));
             currentQuestion.printQuestion();
@@ -136,12 +137,12 @@ public class LearningMode {
 
     private void printWords() {
         System.out.println("Try to remember the following words, you will be tested on them:\n");
-        
+
         for (int i = 0; i < NUMBER_WORDS_TO_LEARN; i++) {
             System.out.println(wordsToLearn.get(i).word + " : " + wordsToLearn.get(i).meaning + " in english");
         }
 
-        System.out.println("Press Enter to continue...");
+        System.out.println("\nPress \"CTRL\" + \"L\" and then press \"Enter\" to continue...");
         kb.nextLine();
 
         //Clearing the console
@@ -152,53 +153,51 @@ public class LearningMode {
 
     }
     
-    private void generateQuestions(){ 
-        
+    /**
+     * This method generates the question for the startSmallTest method
+     */
+    private void generateQuestions() {
         //Static variable to optimize performance from not reading file many times
-        AvailableWord availableWords = VocabLearning.WORD_LIST; 
-        
+        AvailableWord availableWords = VocabLearning.WORD_LIST;
+
         //Getting the wordList from the AvailableWord object
         ArrayList<Word> wordList = availableWords.getAvailableWord();
         Collections.shuffle(wordList);
-        
-        for(int i =0; i < NUMBER_WORDS_TO_LEARN; i++)
-        {
-            
+
+        for (int i = 0; i < NUMBER_WORDS_TO_LEARN; i++) {
+
             //Shuffled word list which will determine the word we select from the word list
             wordsToLearn.add(wordList.get(i));
-            
+
             //Adding the question we selected from the word list
             questionList.add(new FillInTheBlankQuestion(wordList.get(i)));
         }
     }
     
-    private int promptUserNumberWordToLearn(){
-        
-        System.out.println("Hello " + currentUser.userName);
+    private int promptUserNumberWordToLearn() {
+        System.out.println("Hello " + currentUser.getUserName());
         System.out.println("How many words to you want to learn today: ");
-        
+
         int numberWordsUserWillLearn = getUserNumberWordsLearn();
-        
+
         return 0;
     }
     
-    private int getUserNumberWordsLearn() {        
-        
+    private int getUserNumberWordsLearn() {
         //Bad chaining method here
         int numberWordsAvailable = VocabLearning.WORD_LIST.getAvailableWord().size();
         String promptMessage = "Hi, " + currentUser.getUserName() + ".\nHow many words to you want to learn today";
-        promptMessage += "( maximum number is " + numberWordsAvailable+ " )" ;
+        promptMessage += "( maximum number is " + numberWordsAvailable + " )";
 
         return Utility.getUserInputOfNumberOnly(kb, 0, numberWordsAvailable, promptMessage);
     }
     
     //Main is for testing prurposes will use later
-    public static void main(String[] args){
-        
+    public static void main(String[] args) {
         //Each time user choose learning mode we will have to contruct new 
         //Learning mode from random words
         LearningMode learn = new LearningMode();
-        
+
         learn.startSmallTest();
     }
 

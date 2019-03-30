@@ -10,9 +10,7 @@ import java.util.Scanner;
  * The number of question should be around 20 questions per test
  */
 public class TestingMode {
-    
     private int score;
-    
     private final ArrayList<Question> questionList;//each test case should only have constant question
     private final int MULTICHOICE = 0;
     private final int FILL_IN_THE_BLANK = 1;
@@ -20,34 +18,33 @@ public class TestingMode {
     private final int NUMBER_QUESTION = 20;
     private final Random randomQuestionTypePicker;//This will be used to randomly choose between 
                                                   //multichoice or fill in the blank
-
-    public TestingMode(List<Word> wordList){
+    public TestingMode(List<Word> wordList) {
         score = 0;
         randomQuestionTypePicker = new Random();
         questionList = new ArrayList<>();
-        generateQuestion(wordList);                         
+        generateQuestion(wordList);
     }
     
-    public void startTest(){
+    public void startTest() {
         Scanner keyboard = new Scanner(System.in);
         String userInput;
         int questionToPrint = 1; //we havent printed any yet
-        
-        for(Question currentQuestion:questionList){
-            
+
+        for (Question currentQuestion : questionList) {
+
             System.out.println("\nQuestion " + questionToPrint++);
             currentQuestion.printQuestion();
             userInput = keyboard.nextLine();
-            
-            if(currentQuestion instanceof MultiChoiceQuestion){
+
+            if (currentQuestion instanceof MultiChoiceQuestion) {
                 //The reason we pass  keyboard object is to not waste memory and time to 
                 // intialize another keyboard object
-                checkUserAnswerMultiChoice(userInput, keyboard,(MultiChoiceQuestion)currentQuestion );
-            } else{
-                userInput = convertInputToSpecialChar(userInput,(FillInTheBlankQuestion)currentQuestion);
-                checkUserAnswerFillInTheBlank(userInput,currentQuestion);
+                checkUserAnswerMultiChoice(userInput, keyboard, (MultiChoiceQuestion) currentQuestion);
+            } else {
+                userInput = convertInputToSpecialChar(userInput, (FillInTheBlankQuestion) currentQuestion);
+                checkUserAnswerFillInTheBlank(userInput, currentQuestion);
             }
-        } 
+        }
     }
     
     /**
@@ -58,19 +55,19 @@ public class TestingMode {
      * @param userInput
      * @return converted string or just the same string
      */
-    private String convertInputToSpecialChar(String userInput, FillInTheBlankQuestion currentQuestion){
-        
-        if(currentQuestion.containSpecialCharToConvert(userInput)){
+    private String convertInputToSpecialChar(String userInput, FillInTheBlankQuestion currentQuestion) {
+
+        if (currentQuestion.containSpecialCharToConvert(userInput)) {
             String convertedInput = currentQuestion.convertSymbolToSpecialChar(userInput);
             System.out.println("We converted your word into: " + convertedInput);
             return convertedInput;
         }
-        return  userInput;
-    }   
+        return userInput;
+    }  
         
-    private void checkUserAnswerFillInTheBlank(String userInput,Question currentQuestion){
-        
-        switch(currentQuestion.checkUserAnswer(userInput)){
+    private void checkUserAnswerFillInTheBlank(String userInput, Question currentQuestion) {
+
+        switch (currentQuestion.checkUserAnswer(userInput)) {
             case UserCorrect:
                 addPointForUser();
                 break;
@@ -87,33 +84,33 @@ public class TestingMode {
      *      could make the loop start test ugly and messy
      * @param userInput 
      */
-    private void checkUserAnswerMultiChoice(String userInput, Scanner keyboard, MultiChoiceQuestion currentQuestion){
-        
-        switch(currentQuestion.checkUserAnswer(userInput)){
+    private void checkUserAnswerMultiChoice(String userInput, Scanner keyboard, MultiChoiceQuestion currentQuestion) {
+
+        switch (currentQuestion.checkUserAnswer(userInput)) {
             case UserCorrect:
                 addPointForUser();
                 break;
             case UserIncorrect:
                 break;
             case MultiChoiceOutOfRange:
-                    System.out.print("Your answer is invalid please enter again: ");
-                    String userNewAnswer = keyboard.nextLine();
-                    //recursively check for input again.
-                    checkUserAnswerMultiChoice(userNewAnswer,keyboard,currentQuestion);
-                    break;
+                System.out.print("Your answer is invalid please enter again: ");
+                String userNewAnswer = keyboard.nextLine();
+                //recursively check for input again.
+                checkUserAnswerMultiChoice(userNewAnswer, keyboard, currentQuestion);
+                break;
         }
     }
     
-    private void  addPointForUser(){
+    private void addPointForUser() {
         score++;
     }
     
-    public int getScore(){
+    public int getScore() {
         return score;
     }
     
     @Override
-    public String toString(){
+    public String toString() {
         return "Test class";
     }
 
@@ -127,23 +124,23 @@ public class TestingMode {
      * @param wordList 
      */
     private void generateQuestion(List<Word> wordList) {
-        
+
         Collections.shuffle(wordList);//calling more than once will affect performance. 
-                                      //so it's best to call it before constructing testing question only
-        
-        for(int questionGenerate = 0; questionGenerate < NUMBER_QUESTION; questionGenerate++){
-            
+        //so it's best to call it before constructing testing question only
+
+        for (int questionGenerate = 0; questionGenerate < NUMBER_QUESTION; questionGenerate++) {
+
             int questionType = randomQuestionTypePicker.nextInt(TOTAL_TYPE_OF_QUESTION);
             int wordPick = randomQuestionTypePicker.nextInt(wordList.size());
-            
+
             ArrayList<Word> availableWord = VocabLearning.WORD_LIST.getAvailableWord();
-            
-            switch(questionType){
-                
+
+            switch (questionType) {
+
                 case FILL_IN_THE_BLANK:
                     questionList.add(new FillInTheBlankQuestion(availableWord.get(wordPick)));
                     break;
-                    
+
                 case MULTICHOICE:
                     questionList.add(new MultiChoiceQuestion(availableWord.get(wordPick), availableWord));
                     break;

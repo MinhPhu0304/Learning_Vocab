@@ -9,21 +9,18 @@ package vocablearning;
  *
  * @author Millan
  */
-public class User 
-{
-    public String userName;
-    public int lastIndex;
+public class User {
+    private String userName;
+    private int lastIndex;
     
-    public User(String userName, int lastIndex)
-    {
+    public User(String userName, int lastIndex) {
         this.userName = userName;
         this.lastIndex = lastIndex;
     }
     
     @Override
-    public String toString()
-    {
-        return "User: "+userName;
+    public String toString() {
+        return "User: " + userName;
     }
     
     public String getUserName() {
@@ -33,7 +30,7 @@ public class User
     public int getLastIndex() {
         return lastIndex;
     }
-    
+
     public void setLastIndex(int lastIndex) {
         this.lastIndex = lastIndex;
     }

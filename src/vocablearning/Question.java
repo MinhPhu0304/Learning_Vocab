@@ -10,18 +10,9 @@ package vocablearning;
  * @author Minh
  */
 abstract public class Question {
-    
     protected String question;//this will be based on the meaning of the word.
-
-    public String getQuestion() {
-        return question;
-    }
-
-    public String getAnswer() {
-        return answer;
-    }
-    protected String answer;  
-    
+    protected String answer;
+  
     public Question(Word wordToConstructQuestion){
         this.answer = wordToConstructQuestion.getWord();
         this.question = wordToConstructQuestion.getMeaning();//Either the computer gave user the meaning then user 
@@ -29,12 +20,20 @@ abstract public class Question {
                                 //available word choices;
     }
     
-    protected abstract void generateQuestion();//Should change parameter
     public abstract void printQuestion();
+    
     public abstract UserAnswerResult checkUserAnswer(String userInput);
     
+    public String getQuestion() {
+        return question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+    
     @Override
-    public String toString(){
-        return "This question has a the word: " + this.answer + " and it means "+ this.question;
+    public String toString() {
+        return "This question has a the word: " + this.answer + " and it means " + this.question;
     }
 }

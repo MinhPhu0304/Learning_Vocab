@@ -10,7 +10,6 @@ package vocablearning;
  * @author Minh
  */
 public class FillInTheBlankQuestion extends Question {
-
     private final char CHARACTER_Ä_EQUIVALENT = '[';
     private final char CHARACTER_Ö_EQUIVALENT = ']';
     private final char CHARACTER_Ü_EQUIVALENT = ';';
@@ -23,15 +22,11 @@ public class FillInTheBlankQuestion extends Question {
      * Empty method because fill in the blank only requires 
      *  the word and its meaning.
      */
-    @Override
-    protected void generateQuestion() {}
-
-    private void printTypingGuide(){
-        
+    private void printTypingGuide() {
         System.out.println("Notes: German has some special characters");
-        System.out.println("Press " + CHARACTER_Ä_EQUIVALENT+ " for Ä");
-        System.out.println("Press "+ CHARACTER_Ö_EQUIVALENT +" for Ö");
-        System.out.println("Press " + CHARACTER_Ü_EQUIVALENT+  " for Ü");
+        System.out.println("Press " + CHARACTER_Ä_EQUIVALENT + " for Ä");
+        System.out.println("Press " + CHARACTER_Ö_EQUIVALENT + " for Ö");
+        System.out.println("Press " + CHARACTER_Ü_EQUIVALENT + " for Ü");
     }
     
     /**
@@ -44,7 +39,7 @@ public class FillInTheBlankQuestion extends Question {
         System.out.println("Enter the word that match with the meaning of it: ");
         printCensoredAnswer();
         System.out.print(": " + super.question + "\n");
-        System.out.print("Please enter the word: ");        
+        System.out.print("Please enter the word: ");
     }
     
     /**
@@ -52,10 +47,10 @@ public class FillInTheBlankQuestion extends Question {
      *  This will help user to know how many characters in the word
      *  Also this will make the question looks nicer.
      */
-    private void printCensoredAnswer(){
-        char []answerInCharArray = super.answer.toCharArray();
-        
-        for(char i:answerInCharArray){
+    private void printCensoredAnswer() {
+        char[] answerInCharArray = super.answer.toCharArray();
+
+        for (char i : answerInCharArray) {
             System.out.print("_ ");
         }
     }
@@ -68,10 +63,10 @@ public class FillInTheBlankQuestion extends Question {
      */
     @Override
     public UserAnswerResult checkUserAnswer(String userInput) {
-       
-        if(userInput.equalsIgnoreCase(this.answer)){
+
+        if (userInput.equalsIgnoreCase(this.answer)) {
             return UserAnswerResult.UserCorrect;
-        }else{
+        } else {
             return UserAnswerResult.UserIncorrect;
         }
     }
@@ -82,23 +77,22 @@ public class FillInTheBlankQuestion extends Question {
      * @param input
      * @return converted string
      */
-    public String convertSymbolToSpecialChar(String input){
-        String convertedString ;
-        
+    public String convertSymbolToSpecialChar(String input) {
+        String convertedString;
+
         convertedString = input.replace(CHARACTER_Ä_EQUIVALENT, 'Ä');
-        convertedString = convertedString.replace(CHARACTER_Ö_EQUIVALENT,'Ö' );
-        convertedString = convertedString.replace(CHARACTER_Ü_EQUIVALENT,'Ü' );
-        
+        convertedString = convertedString.replace(CHARACTER_Ö_EQUIVALENT, 'Ö');
+        convertedString = convertedString.replace(CHARACTER_Ü_EQUIVALENT, 'Ü');
+
         return convertedString;
     }
     
-    
-    public boolean containSpecialCharToConvert(String userInput){
-        
+    public boolean containSpecialCharToConvert(String userInput) {
+
         boolean contain_Ä_symbol = userInput.contains(Character.toString(CHARACTER_Ä_EQUIVALENT));
         boolean contain_Ö_symbol = userInput.contains(Character.toString(CHARACTER_Ö_EQUIVALENT));
         boolean cotain_Ü_symbol = userInput.contains(Character.toString(CHARACTER_Ü_EQUIVALENT));
-        
-        return contain_Ä_symbol || contain_Ö_symbol || cotain_Ü_symbol ;
+
+        return contain_Ä_symbol || contain_Ö_symbol || cotain_Ü_symbol;
     }
 }
