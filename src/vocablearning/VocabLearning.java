@@ -42,8 +42,8 @@ public class VocabLearning {
                     break;
                 case LEARNING_MODE:
                     
-                    LearningMode learningMode = new LearningMode(5);//testing only
-                    learningMode.startLearning();
+                    LearningMode learningMode = new LearningMode();//testing only
+                    learningMode.startSmallTest();
                     break;
                 case EXIT:
                     

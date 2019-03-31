@@ -37,10 +37,12 @@ public class AvailableWord {
             readInAvailableWordList(bufferedFile);
         }
         catch (FileNotFoundException error) {
+            
             System.err.println("File not found,please check the file url");
             System.err.println(error);
         }
         catch (IOException exception) {
+            
             //Since FileNotFoundException has been catched so we do not need to 
             // reprint the exception again
             if (!(exception instanceof FileNotFoundException)) {

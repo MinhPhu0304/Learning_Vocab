@@ -36,17 +36,6 @@ public class LearningMode {
         this.generateQuestions();
     }
     
-    public LearningMode(int numberWordsToLearn) {
-        kb = new Scanner(System.in);
-        NUMBER_WORDS_TO_LEARN = numberWordsToLearn;
-        questionList = new ArrayList<>();
-        wordsToLearn = new LinkedList<>();
-        userList = new ArrayList<>();
-
-        askUserName();
-        this.generateQuestions();
-    }
-    
     /**
      * This method takes in the user's input and then takes checks it with the existing users
      * If the username already exist then it loads that user's index
@@ -112,7 +101,7 @@ public class LearningMode {
     /**
      * This will be used to see how many words user learn, After user learn all the words.
      */
-    private void startSmallTest() {
+    public void startSmallTest() {
         
         printWords();
         String userInput;
