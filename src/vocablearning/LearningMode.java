@@ -19,12 +19,14 @@ public class LearningMode {
     private final Scanner kb;
     private final int NUMBER_WORDS_TO_LEARN; // This variable stores how much question that the user wants to learn
     private final int numberTypingRepeatToRemember = 5;
+    private final int numberEmptyLineToPrint = 5;//making user think this is a new screen
     private LinkedList<Word> wordsToLearn;
     private ArrayList<FillInTheBlankQuestion> questionList; //This is the question list which stores the questions that are randomly selected from the wordlist
     private ArrayList<User> userList;
     private User currentUser;
     private UserListGenerator userDatabaseIO;
     public static final AvailableWord LEARNING_MODE_WORD_LIST = new AvailableWord();
+    
     
     public LearningMode() {
         kb = new Scanner(System.in);
@@ -112,17 +114,28 @@ public class LearningMode {
             //Saving the question the current question into a temporary variable
             FillInTheBlankQuestion currentQuestion = questionList.get(currentQuestionNumber);
 
-            //Adding 1 to print out more user friendly question number
+            //Adding 1 to print out more user friendly question number instead of array index
             System.out.println("\nQuestion " + (currentQuestionNumber + 1));
             currentQuestion.printQuestion();
             userInput = kb.nextLine();
-
-            UserAnswerResult checkAnswer = currentQuestion.checkUserAnswer(userInput);
-            if (checkAnswer == UserAnswerResult.UserCorrect) {
-                System.out.println("That is correct");
-            } else {
-                System.out.println("That is incorrect the answer was " + currentQuestion.answer);
-            }
+            
+            compareUserInputWithAnswer(userInput,currentQuestion);
+        }
+    }
+    
+    /**
+     * Check user input but it also print out if the user input is correct or not
+     * @param userInput
+     * @param currentQuestion 
+     */
+    private void compareUserInputWithAnswer(String userInput, Question currentQuestion) {
+        
+        UserAnswerResult checkAnswer = currentQuestion.checkUserAnswer(userInput);
+        
+        if (checkAnswer == UserAnswerResult.UserCorrect) {
+            System.out.println("That is correct");
+        } else {
+            System.out.println("That is incorrect the answer was " + currentQuestion.answer);
         }
     }
     
@@ -162,15 +175,15 @@ public class LearningMode {
             System.out.println(wordsToLearn.get(i).word + " : " + wordsToLearn.get(i).meaning + " in english");
         }
 
+        //In Netbeans for window this short cut will work. Otherwise it will only print new line
         System.out.println("\nPress \"CTRL\" + \"L\" and then press \"Enter\" to continue...");
         kb.nextLine();
 
         //Clearing the console
         //Could'nt find a way to clear the console properly so just ran for loop printing out new lines
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < numberEmptyLineToPrint; i++) {
             System.out.println("\n");
         }
-
     }
     
     /**
