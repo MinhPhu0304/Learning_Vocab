@@ -32,8 +32,14 @@ public class LearningMode {
         wordsToLearn = new LinkedList<>();
         userList = new ArrayList<>();
         askUserName();
-        NUMBER_WORDS_TO_LEARN = getUserNumberWordsLearn();
-        this.generateQuestions();
+        //Checking if the user has already learned every word in the word list
+        if (!(currentUser.getLastIndex() >= LEARNING_MODE_WORD_LIST.getAvailableWord().size())) {
+            this.generateQuestions();
+            NUMBER_WORDS_TO_LEARN = getUserNumberWordsLearn();
+        }
+        else {
+            NUMBER_WORDS_TO_LEARN = currentUser.getLastIndex(); 
+        }
     }
     
     /**
@@ -90,7 +96,7 @@ public class LearningMode {
         }
         
         startSmallTest();
-        currentUser.setLastIndex(currentUser.getLastIndex()+currentWordToLearn);
+        currentUser.setLastIndex(currentUser.getLastIndex()+currentWordToLearn-1); //Minus 1 from this as we want to change it to an index(Index count from 0 onwards)
         userDatabaseIO.saveUserList(userList);
     }
     
@@ -193,6 +199,10 @@ public class LearningMode {
         promptMessage += "( maximum number is " + numberWordsAvailable + " )";
 
         return Utility.getUserInputOfNumberOnly(kb, 0, numberWordsAvailable, promptMessage);
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
     }
     
 }

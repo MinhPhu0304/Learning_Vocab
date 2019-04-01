@@ -44,7 +44,13 @@ public class VocabLearning {
                 case LEARNING_MODE:
                     
                     LearningMode learningMode = new LearningMode();//testing only
-                    learningMode.startLearning();
+                    //Checking if the user has already learned every word in the word list
+                    if (learningMode.getCurrentUser().getLastIndex() >= WORD_LIST.getAvailableWord().size()) {
+                        System.out.println("You have learned every word in the program.\n\nMore coming soon!");
+                    }
+                    else {
+                        learningMode.startLearning();
+                    }
                     break;
                 case EXIT:
                     
