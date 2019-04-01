@@ -47,7 +47,7 @@ public class VocabLearning {
                     
                     //Checking if the user has already learned every word in the word list
                     int totalWord = WORD_LIST.getAvailableWord().size();
-                    if (learningMode.getCurrentUser().getLastIndex() >= totalWord) {
+                    if (learningMode.getCurrentUserLastIndex() >= totalWord) {
                         System.out.println("Ur Oh, it seems like you have learnt every word avaiable.\nPerharps trying on of the test?\n\nMore coming soon!");
                     }
                     else {

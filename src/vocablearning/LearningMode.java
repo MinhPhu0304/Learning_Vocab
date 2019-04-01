@@ -5,9 +5,7 @@
  */
 package vocablearning;
 
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -18,7 +16,7 @@ import java.util.Scanner;
 public class LearningMode {
     private final Scanner kb;
     private final int NUMBER_WORDS_TO_LEARN; // This variable stores how much question that the user wants to learn
-    private final int numberTypingRepeatToRemember = 5;
+    private final int NUMBER_TYPING_REPEAT_TO_REMEBER = 5;
     private final int numberEmptyLineToPrint = 5;//making user think this is a new screen
     private LinkedList<Word> wordsToLearn;
     private ArrayList<FillInTheBlankQuestion> questionList; //This is the question list which stores the questions that are randomly selected from the wordlist
@@ -153,7 +151,9 @@ public class LearningMode {
         System.out.println("Word number " +  currentWordNumber + " :");
         System.out.println("The word is " + thisWord.word);
         System.out.println("The word means " + thisWord.meaning);
-        for(int i =0; i < numberTypingRepeatToRemember; i++) {
+        
+        System.out.println("\nType the word out "+NUMBER_TYPING_REPEAT_TO_REMEBER+" times:\n");
+        for(int i =0; i < NUMBER_TYPING_REPEAT_TO_REMEBER; i++) {
             System.out.print("Enter the word:");
             
             userTyping = kb.nextLine();
@@ -207,15 +207,15 @@ public class LearningMode {
     
     private int getUserNumberWordsLearn() {
         //Bad chaining method here
-        int numberWordsAvailable = LEARNING_MODE_WORD_LIST.getAvailableWord().size();
+        int numberWordsAvailable = LEARNING_MODE_WORD_LIST.getAvailableWord().size()-currentUser.getLastIndex(); //Subtracting the user's last index from the word list size
         String promptMessage = "Hi, " + currentUser.getUserName() + ".\nHow many words to you want to learn today";
         promptMessage += "( maximum number is " + numberWordsAvailable + " )";
 
         return Utility.getUserInputOfNumberOnly(kb, 0, numberWordsAvailable, promptMessage);
     }
 
-    public User getCurrentUser() {
-        return currentUser;
+    public int getCurrentUserLastIndex() {
+        return currentUser.getLastIndex();
     }
     
 }
