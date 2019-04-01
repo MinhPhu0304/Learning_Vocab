@@ -16,7 +16,6 @@ public class VocabLearning {
     public static final AvailableWord WORD_LIST = new AvailableWord();
     
     public static void main(String[] args) {
-        
         final int TESTING_MODE = 1;
         final int LEARNING_MODE = 2;
         final int EXIT = 3;

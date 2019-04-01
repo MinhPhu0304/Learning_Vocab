@@ -10,7 +10,7 @@ package vocablearning;
  * @author Millan
  */
 public class User {
-    private String userName;
+    private final String userName;
     private int lastIndex;
     
     public User(String userName, int lastIndex) {
@@ -34,5 +34,4 @@ public class User {
     public void setLastIndex(int lastIndex) {
         this.lastIndex = lastIndex;
     }
-    
 }

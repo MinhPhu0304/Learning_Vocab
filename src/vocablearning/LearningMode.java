@@ -7,7 +7,6 @@ package vocablearning;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -19,12 +18,11 @@ import java.util.Scanner;
 public class LearningMode {
     private final Scanner kb;
     private final int NUMBER_WORDS_TO_LEARN; // This variable stores how much question that the user wants to learn
-
+    public static final AvailableWord LEARNING_MODE_WORD_LIST = new AvailableWord();
     private LinkedList<Word> wordsToLearn;
     private ArrayList<FillInTheBlankQuestion> questionList; //This is the question list which stores the questions that are randomly selected from the wordlist
     private ArrayList<User> userList;
     private User currentUser;
-    
     
     public LearningMode() {
         kb = new Scanner(System.in);
@@ -147,19 +145,17 @@ public class LearningMode {
      */
     private void generateQuestions() {
         //Static variable to optimize performance from not reading file many times
-        AvailableWord availableWords = VocabLearning.WORD_LIST;
+        AvailableWord availableWords = LEARNING_MODE_WORD_LIST;
 
         //Getting the wordList from the AvailableWord object
         ArrayList<Word> wordList = availableWords.getAvailableWord();
-        Collections.shuffle(wordList);
 
         for (int i = 0; i < NUMBER_WORDS_TO_LEARN; i++) {
-
-            //Shuffled word list which will determine the word we select from the word list
-            wordsToLearn.add(wordList.get(i));
+            //Adding the word from the list which the user has learned up to based on the lastIndex variable
+            wordsToLearn.add(wordList.get(i+currentUser.getLastIndex()));
 
             //Adding the question we selected from the word list
-            questionList.add(new FillInTheBlankQuestion(wordList.get(i)));
+            questionList.add(new FillInTheBlankQuestion(wordList.get(i+currentUser.getLastIndex())));
         }
     }
     
@@ -174,7 +170,7 @@ public class LearningMode {
     
     private int getUserNumberWordsLearn() {
         //Bad chaining method here
-        int numberWordsAvailable = VocabLearning.WORD_LIST.getAvailableWord().size();
+        int numberWordsAvailable = LEARNING_MODE_WORD_LIST.getAvailableWord().size();
         String promptMessage = "Hi, " + currentUser.getUserName() + ".\nHow many words to you want to learn today";
         promptMessage += "( maximum number is " + numberWordsAvailable + " )";
 

@@ -1,5 +1,4 @@
 Frank:1,
 George:5,
 Millan:0,
-minh:0,
-dd:0
+minh:0

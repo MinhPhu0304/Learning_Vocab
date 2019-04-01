@@ -24,7 +24,6 @@ public class Utility {
      * @return The correct number within the range.
      */
     public static int getUserInputOfNumberOnly(Scanner kb, int lowerLimit, int upperLimit, String repeatedString) {
-
         boolean userInputCorrect = false;
         String userEnterInput;
         int userChoice = 0; //When the loop finish, it guarantee to have valid input
