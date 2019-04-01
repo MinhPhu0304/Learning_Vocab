@@ -34,8 +34,8 @@ public class LearningMode {
         askUserName();
         //Checking if the user has already learned every word in the word list
         if (!(currentUser.getLastIndex() >= LEARNING_MODE_WORD_LIST.getAvailableWord().size())) {
-            this.generateQuestions();
             NUMBER_WORDS_TO_LEARN = getUserNumberWordsLearn();
+            this.generateQuestions();
         }
         else {
             NUMBER_WORDS_TO_LEARN = currentUser.getLastIndex(); 
