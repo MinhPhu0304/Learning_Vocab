@@ -16,6 +16,8 @@ public class VocabLearning {
     public static final AvailableWord WORD_LIST = new AvailableWord();
     
     public static void main(String[] args) {
+        
+        //Option user can choose
         final int TESTING_MODE = 1;
         final int LEARNING_MODE = 2;
         final int EXIT = 3;
@@ -42,7 +44,7 @@ public class VocabLearning {
                 case LEARNING_MODE:
                     
                     LearningMode learningMode = new LearningMode();//testing only
-                    learningMode.startSmallTest();
+                    learningMode.startLearning();
                     break;
                 case EXIT:
                     

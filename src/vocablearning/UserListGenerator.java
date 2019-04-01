@@ -14,8 +14,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This class is similar to the AvailableWord in which that it handles
@@ -107,11 +105,18 @@ public class UserListGenerator {
 
             writer.print(outputToFile);
             writer.flush();
+            writer.close();
         } catch (IOException ex) {
-            Logger.getLogger(LearningMode.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println();//The user does not need to know about any exception error
         }
     }
-
+    
+    public void saveUserList(ArrayList<User> newList) {
+        //Method overloading is better solution here
+        this.userList = newList;
+        this.saveUserList();
+    }
+    
     public ArrayList<User> getUserList() {
         return userList;
     }

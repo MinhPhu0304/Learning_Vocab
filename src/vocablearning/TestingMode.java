@@ -41,7 +41,7 @@ public class TestingMode {
                 // intialize another keyboard object
                 checkUserAnswerMultiChoice(userInput, keyboard, (MultiChoiceQuestion) currentQuestion);
             } else {
-                userInput = convertInputToSpecialChar(userInput, (FillInTheBlankQuestion) currentQuestion);
+                userInput = convertInputToSpecialChar(userInput);
                 checkUserAnswerFillInTheBlank(userInput, currentQuestion);
             }
         }
@@ -55,10 +55,10 @@ public class TestingMode {
      * @param userInput
      * @return converted string or just the same string
      */
-    private String convertInputToSpecialChar(String userInput, FillInTheBlankQuestion currentQuestion) {
+    private String convertInputToSpecialChar(String userInput) {
 
-        if (currentQuestion.containSpecialCharToConvert(userInput)) {
-            String convertedInput = currentQuestion.convertSymbolToSpecialChar(userInput);
+        if (Utility.containSpecialCharToConvert(userInput)) {
+            String convertedInput = Utility.convertSpecialChar(userInput);
             System.out.println("We converted your word into: " + convertedInput);
             return convertedInput;
         }

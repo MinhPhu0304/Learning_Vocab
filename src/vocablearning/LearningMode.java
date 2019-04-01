@@ -18,11 +18,13 @@ import java.util.Scanner;
 public class LearningMode {
     private final Scanner kb;
     private final int NUMBER_WORDS_TO_LEARN; // This variable stores how much question that the user wants to learn
-    public static final AvailableWord LEARNING_MODE_WORD_LIST = new AvailableWord();
+    private final int numberTypingRepeatToRemember = 5;
     private LinkedList<Word> wordsToLearn;
     private ArrayList<FillInTheBlankQuestion> questionList; //This is the question list which stores the questions that are randomly selected from the wordlist
     private ArrayList<User> userList;
     private User currentUser;
+    private UserListGenerator userDatabaseIO;
+    public static final AvailableWord LEARNING_MODE_WORD_LIST = new AvailableWord();
     
     public LearningMode() {
         kb = new Scanner(System.in);
@@ -45,9 +47,9 @@ public class LearningMode {
         currentUser = new User(userName, 0);
         
         //Creating a UserListGenerator which handle in the file input
-        UserListGenerator userListGenerator = new UserListGenerator(userList);
+        userDatabaseIO = new UserListGenerator(userList);
         //Saving the user list from file in to the program user list file
-        userList = userListGenerator.getUserList();
+        userList = userDatabaseIO.getUserList();
         
         boolean isNameAlreadyExist = checkNameAlreadyExist();
         
@@ -58,7 +60,6 @@ public class LearningMode {
             System.out.println("Hi there, " + currentUser.getUserName());
             userList.add(currentUser);
         }
-        userListGenerator.saveUserList();
     }
     
     /**
@@ -83,23 +84,20 @@ public class LearningMode {
     
     public void startLearning() {
         
-        Iterator iterator = wordsToLearn.iterator();
-        boolean userFinishedLearning = false;
-        
-        do {
-            //I will finish this
-            //Dont make it messy 
-            //Please finish the start Small Test method
-
-        } while (!userFinishedLearning);
+        int currentWordToLearn = 1; //start from 1 to number repeat typing needed
+        for(Word i: wordsToLearn){
+            getUserTypeWordRepeatedly(i,currentWordToLearn++);
+        }
         
         startSmallTest();
+        currentUser.setLastIndex(currentUser.getLastIndex()+currentWordToLearn);
+        userDatabaseIO.saveUserList(userList);
     }
     
     /**
      * This will be used to see how many words user learn, After user learn all the words.
      */
-    public void startSmallTest() {
+    private void startSmallTest() {
         
         printWords();
         String userInput;
@@ -118,6 +116,35 @@ public class LearningMode {
                 System.out.println("That is correct");
             } else {
                 System.out.println("That is incorrect the answer was " + currentQuestion.answer);
+            }
+        }
+    }
+    
+    /**
+     * Repeating typing a word will make a person remember a word and it meanings
+     * Therefore, it is also a good way to learn vocabulary
+     * @param thisWord 
+     * @param currentWordNumber
+     */
+    private void getUserTypeWordRepeatedly(Word thisWord, int currentWordNumber) {
+        
+        String userTyping;
+        String currentWord =  thisWord.word;
+        
+        System.out.println("Word number " +  currentWordNumber + " :");
+        System.out.println("The word is " + thisWord.word);
+        System.out.println("The word means " + thisWord.meaning);
+        for(int i =0; i < numberTypingRepeatToRemember; i++) {
+            System.out.print("Enter the word:");
+            
+            userTyping = kb.nextLine();
+            if(Utility.containSpecialCharToConvert(userTyping)) {
+                userTyping = Utility.convertSpecialChar(userTyping);
+            }
+            
+            if(!userTyping.equalsIgnoreCase(currentWord)){
+                System.out.println("Wrong word typed");
+                --i;//Decrease this enumeration since it is an invalid input
             }
         }
     }
@@ -144,8 +171,8 @@ public class LearningMode {
      * This method generates the question for the startSmallTest method
      */
     private void generateQuestions() {
-        //Static variable to optimize performance from not reading file many times
-        AvailableWord availableWords = LEARNING_MODE_WORD_LIST;
+        
+        AvailableWord availableWords = LearningMode.LEARNING_MODE_WORD_LIST;
 
         //Getting the wordList from the AvailableWord object
         ArrayList<Word> wordList = availableWords.getAvailableWord();
@@ -159,15 +186,6 @@ public class LearningMode {
         }
     }
     
-    private int promptUserNumberWordToLearn() {
-        System.out.println("Hello " + currentUser.getUserName());
-        System.out.println("How many words to you want to learn today: ");
-
-        int numberWordsUserWillLearn = getUserNumberWordsLearn();
-
-        return 0;
-    }
-    
     private int getUserNumberWordsLearn() {
         //Bad chaining method here
         int numberWordsAvailable = LEARNING_MODE_WORD_LIST.getAvailableWord().size();
@@ -177,14 +195,4 @@ public class LearningMode {
         return Utility.getUserInputOfNumberOnly(kb, 0, numberWordsAvailable, promptMessage);
     }
     
-    //Main is for testing prurposes will use later
-    public static void main(String[] args) {
-        //Each time user choose learning mode we will have to contruct new 
-        //Learning mode from random words
-        LearningMode learn = new LearningMode();
-
-        learn.startSmallTest();
-    }
-
-   
 }
