@@ -47,7 +47,7 @@ Gabel:Fork,
 Löffel:Spoon,
 Messer:Knife,
 Glas:Glass,
-Tasse:Cup
+Tasse:Cup,
 Männer:Man,
 Fraunen:Women,
 Hilfe:Help,
