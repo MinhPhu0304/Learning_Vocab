@@ -86,4 +86,21 @@ public class Utility {
 
         return contain_Ä_symbol || contain_Ö_symbol || cotain_Ü_symbol;
     }
+    
+    public static void printTypingGuide() {
+        System.out.println("Notes: German has some special characters");
+        System.out.println("Press " + CHARACTER_Ä_EQUIVALENT + " for Ä");
+        System.out.println("Press " + CHARACTER_Ö_EQUIVALENT + " for Ö");
+        System.out.println("Press " + CHARACTER_Ü_EQUIVALENT + " for Ü");
+    }
+    
+    public static String convertInputToSpecialChar(String userInput) {
+
+        if (Utility.containSpecialCharToConvert(userInput)) {
+            String convertedInput = Utility.convertSpecialChar(userInput);
+            System.out.println("We converted your word into: " + convertedInput);
+            return convertedInput;
+        }
+        return userInput;
+    }  
 }

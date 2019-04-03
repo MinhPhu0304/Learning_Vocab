@@ -18,8 +18,8 @@ public class LearningMode {
     private final int NUMBER_WORDS_TO_LEARN; // This variable stores how much question that the user wants to learn
     private final int NUMBER_TYPING_REPEAT_TO_REMEBER = 5;
     private final int numberEmptyLineToPrint = 5;//making user think this is a new screen
-    private LinkedList<Word> wordsToLearn;
-    private ArrayList<FillInTheBlankQuestion> questionList; //This is the question list which stores the questions that are randomly selected from the wordlist
+    private final LinkedList<Word> wordsToLearn;
+    private final ArrayList<FillInTheBlankQuestion> questionList; //This is the question list which stores the questions that are randomly selected from the wordlist
     private ArrayList<User> userList;
     private User currentUser;
     private UserListGenerator userDatabaseIO;
@@ -148,10 +148,11 @@ public class LearningMode {
         String userTyping;
         String currentWord =  thisWord.word;
         
-        System.out.println("Word number " +  currentWordNumber + " :");
+        System.out.println("\nWord number " +  currentWordNumber + " :");
         System.out.println("The word is " + thisWord.word);
         System.out.println("The word means " + thisWord.meaning);
         
+        Utility.printTypingGuide();
         System.out.println("\nType the word out "+NUMBER_TYPING_REPEAT_TO_REMEBER+" times:\n");
         for(int i =0; i < NUMBER_TYPING_REPEAT_TO_REMEBER; i++) {
             System.out.print("Enter the word:");

@@ -10,10 +10,6 @@ package vocablearning;
  * @author Minh
  */
 public class FillInTheBlankQuestion extends Question {
-    private final char CHARACTER_Ä_EQUIVALENT = '[';
-    private final char CHARACTER_Ö_EQUIVALENT = ']';
-    private final char CHARACTER_Ü_EQUIVALENT = ';';
-    
     public FillInTheBlankQuestion(Word wordToConstructQuestion) {
         super(wordToConstructQuestion);
     }
@@ -22,12 +18,7 @@ public class FillInTheBlankQuestion extends Question {
      * Empty method because fill in the blank only requires 
      *  the word and its meaning.
      */
-    private void printTypingGuide() {
-        System.out.println("Notes: German has some special characters");
-        System.out.println("Press " + CHARACTER_Ä_EQUIVALENT + " for Ä");
-        System.out.println("Press " + CHARACTER_Ö_EQUIVALENT + " for Ö");
-        System.out.println("Press " + CHARACTER_Ü_EQUIVALENT + " for Ü");
-    }
+    
     
     /**
      * Warning: this class only print out the question in a nice way,
@@ -35,7 +26,7 @@ public class FillInTheBlankQuestion extends Question {
      */
     @Override
     public void printQuestion() {
-        printTypingGuide();
+        Utility.printTypingGuide();
         System.out.println("Enter the word that match with the meaning of it: ");
         printCensoredAnswer();
         System.out.print(": " + super.question + "\n");

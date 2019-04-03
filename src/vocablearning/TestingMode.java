@@ -55,15 +55,7 @@ public class TestingMode {
      * @param userInput
      * @return converted string or just the same string
      */
-    private String convertInputToSpecialChar(String userInput) {
-
-        if (Utility.containSpecialCharToConvert(userInput)) {
-            String convertedInput = Utility.convertSpecialChar(userInput);
-            System.out.println("We converted your word into: " + convertedInput);
-            return convertedInput;
-        }
-        return userInput;
-    }  
+    
         
     private void checkUserAnswerFillInTheBlank(String userInput, Question currentQuestion) {
 
@@ -147,4 +139,14 @@ public class TestingMode {
             }
         }
     }
+    
+    private String convertInputToSpecialChar(String userInput) {
+
+        if (Utility.containSpecialCharToConvert(userInput)) {
+            String convertedInput = Utility.convertSpecialChar(userInput);
+            System.out.println("We converted your word into: " + convertedInput);
+            return convertedInput;
+        }
+        return userInput;
+    }  
 }
