@@ -17,12 +17,12 @@ public class LearningMode {
     private final Scanner kb;
     private final int NUMBER_WORDS_TO_LEARN; // This variable stores how much question that the user wants to learn
     private final int NUMBER_TYPING_REPEAT_TO_REMEBER = 5;
-    private final int numberEmptyLineToPrint = 5;//making user think this is a new screen
+    private final int numberEmptyLineToPrint = 10;//making user think this is a new screen
     private final LinkedList<Word> wordsToLearn;
-    private final ArrayList<FillInTheBlankQuestion> questionList; //This is the question list which stores the questions that are randomly selected from the wordlist
+    private final ArrayList<FillInTheBlankQuestion> questionList; //randomly selected from the wordlist
     private ArrayList<User> userList;
     private User currentUser;
-    private UserListGenerator userDatabaseIO;
+    private UserListGenerator userDataIO;
     public static final AvailableWord LEARNING_MODE_WORD_LIST = new AvailableWord();
     private int score = 0;
     
@@ -53,9 +53,9 @@ public class LearningMode {
         currentUser = new User(userName, 0);
         
         //Creating a UserListGenerator which handle in the file input
-        userDatabaseIO = new UserListGenerator(userList);
+        userDataIO = new UserListGenerator(userList);
         //Saving the user list from file in to the program user list file
-        userList = userDatabaseIO.getUserList();
+        userList = userDataIO.getUserList();
         
         boolean isNameAlreadyExist = checkNameAlreadyExist();
         
@@ -97,7 +97,7 @@ public class LearningMode {
         
         startSmallTest();
         currentUser.setLastIndex(currentUser.getLastIndex()+currentWordToLearn-1); //Minus 1 from this as we want to change it to an index(Index count from 0 onwards)
-        userDatabaseIO.saveUserList(userList);
+        userDataIO.saveUserList(userList);
     }
     
     /**
@@ -105,7 +105,7 @@ public class LearningMode {
      */
     private void startSmallTest() {
         
-        printWords();
+        printWordsBeforeTest();
         String userInput;
         
         for (int currentQuestionNumber = 0; currentQuestionNumber < NUMBER_WORDS_TO_LEARN; currentQuestionNumber++) {
@@ -119,6 +119,7 @@ public class LearningMode {
             
             if(Utility.containSpecialCharToConvert(userInput)) {
                 userInput = Utility.convertSpecialChar(userInput);
+                System.out.println("Your words just got converted to: " + userInput);
             }
             
             compareUserInputWithAnswer(userInput,currentQuestion); 
@@ -155,9 +156,8 @@ public class LearningMode {
         String currentWord =  thisWord.word;
         
         System.out.println("\nWord number " +  currentWordNumber + " :");
-        System.out.println("The word is " + thisWord.word);
-        System.out.println("The word means " + thisWord.meaning);
-        
+        printCurrentWordBeingLearnt(thisWord);
+                
         Utility.printTypingGuide();
         System.out.println("\nType the word out "+NUMBER_TYPING_REPEAT_TO_REMEBER+" times:\n");
         for(int i =0; i < NUMBER_TYPING_REPEAT_TO_REMEBER; i++) {
@@ -166,6 +166,7 @@ public class LearningMode {
             userTyping = kb.nextLine();
             if(Utility.containSpecialCharToConvert(userTyping)) {
                 userTyping = Utility.convertSpecialChar(userTyping);
+                System.out.println("What you typed just got converted to: " + userTyping);
             }
             
             if(!userTyping.equalsIgnoreCase(currentWord)){
@@ -174,8 +175,8 @@ public class LearningMode {
             }
         }
     }
-
-    private void printWords() {
+    
+    private void printWordsBeforeTest() {
         System.out.println("Try to remember the following words, you will be tested on them:\n");
 
         for (int i = 0; i < NUMBER_WORDS_TO_LEARN; i++) {
@@ -218,11 +219,22 @@ public class LearningMode {
         String promptMessage = "Hi, " + currentUser.getUserName() + ".\nHow many words to you want to learn today";
         promptMessage += "( maximum number is " + numberWordsAvailable + " )";
 
-        return Utility.getUserInputOfNumberOnly(kb, 0, numberWordsAvailable, promptMessage);
+        return Utility.getUserInputOfNumberOnly(kb, 1, numberWordsAvailable, promptMessage);
     }
 
     public int getCurrentUserLastIndex() {
         return currentUser.getLastIndex();
+    }
+
+    /**
+     * Print the word in a nice way for user
+     * @param wordToPrint 
+     */
+    private void printCurrentWordBeingLearnt(Word wordToPrint) {
+        System.out.println("____________________________________________________");
+        System.out.println("|The word is " + wordToPrint.word);
+        System.out.println("|The word means " + wordToPrint.meaning);
+        System.out.println("####################################################");
     }
     
 }

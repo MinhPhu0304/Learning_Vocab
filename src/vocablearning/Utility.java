@@ -88,7 +88,8 @@ public class Utility {
     }
     
     public static void printTypingGuide() {
-        System.out.println("Notes: German has some special characters");
+        System.out.println("Notes: German has some special characters.");
+        System.out.println("To type them without changing keyboard language");
         System.out.println("Press " + CHARACTER_Ä_EQUIVALENT + " for Ä");
         System.out.println("Press " + CHARACTER_Ö_EQUIVALENT + " for Ö");
         System.out.println("Press " + CHARACTER_Ü_EQUIVALENT + " for Ü");
