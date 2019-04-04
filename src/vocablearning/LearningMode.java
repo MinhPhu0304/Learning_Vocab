@@ -124,7 +124,6 @@ public class LearningMode {
             compareUserInputWithAnswer(userInput,currentQuestion); 
         }
         System.out.println("You got "+score+" out of "+NUMBER_WORDS_TO_LEARN+" correct!");
-        score = 0;
     }
     
     /**
