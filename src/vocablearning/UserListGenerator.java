@@ -47,6 +47,7 @@ public class UserListGenerator {
                 System.err.println(exception.getMessage());
             }
         }
+        
     }
     
     /**

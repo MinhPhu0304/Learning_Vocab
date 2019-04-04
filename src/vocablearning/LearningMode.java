@@ -24,7 +24,7 @@ public class LearningMode {
     private User currentUser;
     private UserListGenerator userDatabaseIO;
     public static final AvailableWord LEARNING_MODE_WORD_LIST = new AvailableWord();
-    
+    private int score = 0;
     
     public LearningMode() {
         kb = new Scanner(System.in);
@@ -108,6 +108,7 @@ public class LearningMode {
         printWords();
         String userInput;
 
+        
         for (int currentQuestionNumber = 0; currentQuestionNumber < NUMBER_WORDS_TO_LEARN; currentQuestionNumber++) {
             //Saving the question the current question into a temporary variable
             FillInTheBlankQuestion currentQuestion = questionList.get(currentQuestionNumber);
@@ -117,8 +118,14 @@ public class LearningMode {
             currentQuestion.printQuestion();
             userInput = kb.nextLine();
             
-            compareUserInputWithAnswer(userInput,currentQuestion);
+            if(Utility.containSpecialCharToConvert(userInput)) {
+                userInput = Utility.convertSpecialChar(userInput);
+            }
+            
+            compareUserInputWithAnswer(userInput,currentQuestion); 
         }
+        System.out.println("You got "+score+" out of "+NUMBER_WORDS_TO_LEARN+" correct!");
+        score = 0;
     }
     
     /**
@@ -132,6 +139,7 @@ public class LearningMode {
         
         if (checkAnswer == UserAnswerResult.UserCorrect) {
             System.out.println("That is correct");
+            score++;
         } else {
             System.out.println("That is incorrect the answer was " + currentQuestion.answer);
         }
