@@ -26,13 +26,17 @@ public class TestingMode {
     }
     
     public void startTest() {
+
+        printGreetingUser();
+
         Scanner keyboard = new Scanner(System.in);
         String userInput;
-        int questionToPrint = 1; //we havent printed any yet
+
+        int currentQuestionNumber = 1; //first question
 
         for (Question currentQuestion : questionList) {
 
-            System.out.println("\nQuestion " + questionToPrint++);
+            System.out.println("\nQuestion " + currentQuestionNumber++);
             currentQuestion.printQuestion();
             userInput = keyboard.nextLine();
 
@@ -45,18 +49,18 @@ public class TestingMode {
                 checkUserAnswerFillInTheBlank(userInput, currentQuestion);
             }
         }
+    }    
+       
+    private void printGreetingUser() {
+        System.out.println("*****************************************************************************");
+        System.out.println("*                                                                           *");
+        System.out.println("*       Welcome to testing mode                                             *");
+        System.out.println("*   There will be 20 question to test your German vocabulary knowledge      *");
+        System.out.println("*       Are you ready??                                                     *");
+        System.out.println("*       Let\'s get started!!                                                *");
+        System.out.println("*****************************************************************************");
     }
     
-    /**
-     * This method will perform change in the user Input if it detect user want
-     *  to type Ä or Ö or Ü
-     * User will type symbol '[' '[' or ';' to convert to those special character
-     * If user does not type any special symbol like that it will just return the same
-     * @param userInput
-     * @return converted string or just the same string
-     */
-    
-        
     private void checkUserAnswerFillInTheBlank(String userInput, Question currentQuestion) {
 
         switch (currentQuestion.checkUserAnswer(userInput)) {
@@ -73,23 +77,24 @@ public class TestingMode {
      *  until user type the right question from the range
      * The reason to have 2 different methods for multi choice and fill in the blank
      *  is because the multi choice will have to perform a loop if necessary needed which
-     *      could make the loop start test ugly and messy
+     *      could make the code messy and long
      * @param userInput 
+     * @param keyboard to reuse object instead of initialize more
+     * @param currentQuestion to use check user input method
      */
     private void checkUserAnswerMultiChoice(String userInput, Scanner keyboard, MultiChoiceQuestion currentQuestion) {
 
         switch (currentQuestion.checkUserAnswer(userInput)) {
             case UserCorrect:
                 addPointForUser();
-                break;
+                return;
             case UserIncorrect:
-                break;
+                return;
             case MultiChoiceOutOfRange:
                 System.out.print("Your answer is invalid please enter again: ");
                 String userNewAnswer = keyboard.nextLine();
                 //recursively check for input again.
                 checkUserAnswerMultiChoice(userNewAnswer, keyboard, currentQuestion);
-                break;
         }
     }
     
@@ -103,7 +108,7 @@ public class TestingMode {
     
     @Override
     public String toString() {
-        return "Test class";
+        return "Test mode class";
     }
 
     /**

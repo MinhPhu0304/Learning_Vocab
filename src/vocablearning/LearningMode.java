@@ -107,7 +107,6 @@ public class LearningMode {
         
         printWords();
         String userInput;
-
         
         for (int currentQuestionNumber = 0; currentQuestionNumber < NUMBER_WORDS_TO_LEARN; currentQuestionNumber++) {
             //Saving the question the current question into a temporary variable
