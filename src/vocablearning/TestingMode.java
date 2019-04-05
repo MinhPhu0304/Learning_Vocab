@@ -51,16 +51,6 @@ public class TestingMode {
         
         printEndOfTest();
     }    
-       
-    private void printGreetingUser() {
-        System.out.println("*************************************************************************");
-        System.out.println("*                                                                       *");
-        System.out.println("*       Welcome to testing mode                                         *");
-        System.out.println("*   There will be 20 question to test your German vocabulary knowledge  *");
-        System.out.println("*       Are you ready??                                                 *");
-        System.out.println("*       Let\'s get started!!                                             *");
-        System.out.println("*************************************************************************");
-    }
     
     private void checkUserAnswerFillInTheBlank(String userInput, Question currentQuestion) {
 
@@ -157,8 +147,18 @@ public class TestingMode {
     }  
 
     private void printEndOfTest() {
-            System.out.println("*************************************");
-            System.out.println("*       Test has completed          *");
-            System.out.println("*************************************");
+            System.out.println("\n*************************************************************************");
+            System.out.println("*                         Test has ended                                *");
+            System.out.println("*************************************************************************");
+    }
+    
+    private void printGreetingUser() {
+        System.out.println("*************************************************************************");
+        System.out.println("*                                                                       *");
+        System.out.println("*                        Welcome to testing mode                        *");
+        System.out.println("*   There will be 20 question to test your German vocabulary knowledge  *");
+        System.out.println("*                            Are you ready??                            *");
+        System.out.println("*                          Let\'s get started!!                          *");
+        System.out.println("*************************************************************************");
     }
 }

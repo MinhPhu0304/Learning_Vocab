@@ -36,26 +36,22 @@ public class VocabLearning {
             //No need for default since getUserChoice already include error handling
             switch (userInput) {
                 case TESTING_MODE:
-                    
                     testVocab = new TestingMode(WORD_LIST.getAvailableWord());
                     testVocab.startTest();
-                    System.out.println("\nYou have answered " + testVocab.getScore() + " out of 20 questions");
+                    printTestModeScore(testVocab);
                     break;
                 case LEARNING_MODE:
-                    
                     LearningMode learningMode = new LearningMode();
                     
                     //Checking if the user has already learned every word in the word list
                     int totalWord = WORD_LIST.getAvailableWord().size();
                     if (learningMode.getCurrentUserLastIndex() >= totalWord) {
                         System.out.println("Ur Oh, it seems like you have learnt every word avaiable.\nPerharps trying on of the test?\n\nMore coming soon!");
-                    }
-                    else {
+                    } else {
                         learningMode.startLearning();
                     }
                     break;
                 case EXIT:
-                    
                     System.out.println("Exiting Program...");
                     System.exit(0);
             }
@@ -71,4 +67,24 @@ public class VocabLearning {
         return Utility.getUserInputOfNumberOnly(kb, 1, 3, promptMessage);
     }
     
+    public static void printTestModeScore(TestingMode testMode)
+    {
+        int score = testMode.getScore();
+        //Variable to see if we need to print out a extra space or not
+        String space = "";
+        
+        //If the number is greater than one then it would take out two spaces so we need an extra space if it is smaller than 9 i.e it will be a digit
+        if(score < 9)
+        {
+            space += " ";
+        }
+        
+        System.out.println("*************************************************************************");
+        System.out.println("*                         Congratulations!                              *");
+        System.out.println("*                         You have scored                               *");
+        System.out.println("*                               " + score + space+"                                      *");
+        System.out.println("*                        out of 20 questions!                           *");
+        System.out.println("*                                                                       *");
+        System.out.println("*************************************************************************");
+    }
 }

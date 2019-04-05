@@ -25,6 +25,9 @@ public class LearningMode {
     private UserListGenerator userDataIO;
     public static final AvailableWord LEARNING_MODE_WORD_LIST = new AvailableWord();
     private int score = 0;
+    public final String CORRECT_ANSI = "\u001B[32m"; //ANSI code for green when the user gets it right
+    public final String INCORRECT_ANSI = "\u001B[31m";//ANSI code for red when the user get it wrong
+    public final String RESET_ANSI = "\u001B[0m";//ANSI code to reset the colour so the next String won't be in a colour
     
     public LearningMode() {
         kb = new Scanner(System.in);
@@ -124,7 +127,7 @@ public class LearningMode {
             
             compareUserInputWithAnswer(userInput,currentQuestion); 
         }
-        System.out.println("You got "+score+" out of "+NUMBER_WORDS_TO_LEARN+" correct!");
+        printScore();
     }
     
     /**
@@ -137,10 +140,14 @@ public class LearningMode {
         UserAnswerResult checkAnswer = currentQuestion.checkUserAnswer(userInput);
         
         if (checkAnswer == UserAnswerResult.UserCorrect) {
-            System.out.println("That is correct");
+            System.out.println(CORRECT_ANSI + "***************************");
+            System.out.println(CORRECT_ANSI + "*          Correct        *");
+            System.out.println(CORRECT_ANSI + "***************************"+RESET_ANSI);
             score++;
         } else {
-            System.out.println("That is incorrect the answer was " + currentQuestion.answer);
+            System.out.println(INCORRECT_ANSI+"***************************");
+            System.out.println(INCORRECT_ANSI+"*         incorrect       *");
+            System.out.println(INCORRECT_ANSI+"***************************"+RESET_ANSI);
         }
     }
     
@@ -235,6 +242,26 @@ public class LearningMode {
         System.out.println("|The word is " + wordToPrint.word);
         System.out.println("|The word means " + wordToPrint.meaning);
         System.out.println("####################################################");
+    }
+    
+    private void printScore()
+    {
+        //String variable to check to whether to print out a extra space if its a singular
+        String question = "question! ";
+        
+        //If the numeber of questions that they had was more than one then set question to another variable that is its plural
+        if(NUMBER_WORDS_TO_LEARN > 1)
+        {
+            question = "questions!";
+        }
+        
+        System.out.println("*************************************************************************");
+        System.out.println("*                          Congratulations!                             *");
+        System.out.println("*                          You have scored                              *");
+        System.out.println("*                                 "+score+"                                     *");
+        System.out.println("*                         out of "+NUMBER_WORDS_TO_LEARN+" "+question+"                           *");
+        System.out.println("*                                                                       *");
+        System.out.println("*************************************************************************");
     }
     
 }
